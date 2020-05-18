@@ -6,15 +6,17 @@ using startProject.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using startProject.Logic;
+using startProject.Data;
 
 namespace startProject.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly startProject.Data.StartProjectContext _context;
+        private readonly StartProjectContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger, startProject.Data.StartProjectContext context)
+        public IndexModel(ILogger<IndexModel> logger, StartProjectContext context)
         {
             _logger = logger;
             _context = context;
@@ -37,18 +39,22 @@ namespace startProject.Pages
         public async Task OnGetAsync()
         {
             //Add value to var:
+            string inputWeekNrFlowerStart = Request.Query["FormWeekNrFlowerStart"];
+            string inputWeekNrFlowerEnd = Request.Query["FormWeekNrFlowerEnd"];
             CheckWeekNrFlowerStart = !string.IsNullOrEmpty(Request.Query["CheckWeekNrFlowerStart"]);
             CheckWeekNrFlowerEnd = !string.IsNullOrEmpty(Request.Query["CheckWeekNrFlowerEnd"]);
+
+            Filter filter = new Filter(this._context.Products);
 
             var queryResult = this._context.Products.Select(p => p);
 
             //Filtering
-            if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerStart"]))
+            if (!string.IsNullOrEmpty(inputWeekNrFlowerStart))
             {
                 queryResult = queryResult.Where(q => q.WeekNrFlowerStart >= FormWeekNrFlowerStart);
             }
 
-            if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerEnd"]))
+            if (!string.IsNullOrEmpty(inputWeekNrFlowerEnd))
             {
                 queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= FormWeekNrFlowerEnd);
             }

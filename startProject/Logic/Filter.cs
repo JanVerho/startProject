@@ -8,13 +8,13 @@ namespace startProject.Logic
 {
     public class Filter
     {
-        public List<Product> ProductList { get; set; }
+        public IEnumerable<Product> ProductList { get; set; }
 
         public Filter()
         {
         }
 
-        public Filter(List<Product> productList)
+        public Filter(IEnumerable<Product> productList)
         {
             ProductList = productList;
         }
