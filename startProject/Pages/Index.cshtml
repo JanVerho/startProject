@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welkom op onze bloemproduct pagina</h1>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MyProductList[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyProductList[0].WeekNrFlowerStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyProductList[0].WeekNrFlowerEnd)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ResultProducts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WeekNrFlowerStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WeekNrFlowerEnd)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form method="get">
+    <p>Vul een weeknummer in:</p>
+    <div>StartWeek Bloei</div><input type="number" name="FormWeekNrFlowerStart" value="FormWeekNrFlowerStart" />
+    <div>EindWeek Bloei</div><input type="number" name="FormWeekNrFlowerEnd" value="FormWeekNrFlowerEnd" />
+    <div>
+        <label for="CheckWeekNrFlowerStart">
+            Sorteer op StartWeek Bloei
+        </label>
+        <input type="checkbox" name="CheckWeekNrFlowerStart" />
+        <label for="CheckWeekNrFlowerEnd">
+            Sorteer op EindWeek Bloei
+        </label>
+        <input type="checkbox" name="CheckWeekNrFlowerEnd" />
+    </div>
+    <input type="submit" value="Verzenden met Get" />
+</form>
+
+<h2>De door u gemaakte keuze volgens Start en einde bloei week</h2>
+@{
+    foreach (var item in Model.ResultProducts)
+    {
+        <p>@item.Name</p>
+    }
+}
+<hr />
