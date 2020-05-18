@@ -31,49 +31,44 @@ namespace startProject.Pages
         [BindProperty(SupportsGet = true)]
         public bool CheckWeekNrFlowerStart { get; set; }
 
+        [BindProperty(SupportsGet = true)]
         public bool CheckWeekNrFlowerEnd { get; set; }
 
         public async Task OnGetAsync()
         {
-            var queryResult = (from prod in this._context.Products
-                               orderby prod.Name
-                               select prod);
+            //Add value to var:
+            CheckWeekNrFlowerStart = !string.IsNullOrEmpty(Request.Query["CheckWeekNrFlowerStart"]);
+            CheckWeekNrFlowerEnd = !string.IsNullOrEmpty(Request.Query["CheckWeekNrFlowerEnd"]);
 
+            var queryResult = this._context.Products.Select(p => p);
+
+            //Filtering
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerStart"]))
             {
-                queryResult = (from prod in this._context.Products
-                               where prod.WeekNrFlowerStart >= FormWeekNrFlowerStart
-                               orderby prod.Name
-                               select prod);
+                queryResult = queryResult.Where(q => q.WeekNrFlowerStart >= FormWeekNrFlowerStart);
             }
 
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerEnd"]))
             {
-                queryResult = (from prod in this._context.Products
-                               where prod.WeekNrFlowerEnd <= FormWeekNrFlowerEnd
-                               orderby prod.Name
-                               select prod);
+                queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= FormWeekNrFlowerEnd);
             }
 
-            if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerStart"]) && !string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerEnd"]))
-            {
-                queryResult = (from prod in this._context.Products
-                               where prod.WeekNrFlowerStart >= FormWeekNrFlowerStart && prod.WeekNrFlowerEnd <= FormWeekNrFlowerEnd
-                               orderby prod.Name
-                               select prod);
-            }
-
-            if (CheckWeekNrFlowerStart)
+            //Sorting
+            if (CheckWeekNrFlowerStart && !CheckWeekNrFlowerEnd)
             {
                 queryResult = queryResult.OrderBy(q => q.WeekNrFlowerStart).ThenBy(q => q.Name);
             }
-            if (CheckWeekNrFlowerEnd)
+            else if (!CheckWeekNrFlowerStart && CheckWeekNrFlowerEnd)
             {
                 queryResult = queryResult.OrderBy(q => q.WeekNrFlowerEnd).ThenBy(q => q.Name);
             }
-            if (CheckWeekNrFlowerEnd && CheckWeekNrFlowerStart)
+            else if (CheckWeekNrFlowerStart && CheckWeekNrFlowerEnd)
             {
                 queryResult = queryResult.OrderBy(q => q.WeekNrFlowerStart).ThenBy(q => q.WeekNrFlowerEnd).ThenBy(q => q.Name);
+            }
+            else
+            {
+                queryResult = queryResult.OrderBy(q => q.Name);
             }
 
             ResultProducts = await queryResult.ToArrayAsync();
