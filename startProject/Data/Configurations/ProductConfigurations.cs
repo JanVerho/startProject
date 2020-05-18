@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using startProject.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace startProject.Data.Configurations
 {
@@ -14,6 +10,5 @@ namespace startProject.Data.Configurations
         public void Configure(EntityTypeBuilder<Product> builder)
         {
         }
-
     }
 }

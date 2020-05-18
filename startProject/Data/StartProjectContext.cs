@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using startProject.Data.Configurations;
 using startProject.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace startProject.Data
 {
@@ -16,11 +12,10 @@ namespace startProject.Data
         {
             optionsBuilder.UseSqlite(@"Data source=startProject.db");
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProductConfigurations()).Seed();
         }
-
-
     }
 }
