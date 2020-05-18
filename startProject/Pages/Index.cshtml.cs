@@ -34,7 +34,6 @@ namespace startProject.Pages
 
         public bool CheckWeekNrFlowerEnd { get; set; }
 
-        //public string[] MyFlowersSelected;
 
         public async Task OnGetAsync()
         {
