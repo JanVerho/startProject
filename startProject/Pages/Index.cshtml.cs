@@ -20,7 +20,7 @@ namespace startProject.Pages
             _context = context;
         }
 
-        public IList<Product> MyProductList { get; set; }
+        //public IList<Product> MyProductList { get; set; }
         public Product[] ResultProducts { get; set; }
 
         [BindProperty(SupportsGet = true)]
