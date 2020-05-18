@@ -43,7 +43,7 @@ namespace startProject.Pages
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerStart"]))
             {
                 queryResult = (from prod in this._context.Products
-                               where prod.WeekNrFlowerStart == FormWeekNrFlowerStart
+                               where prod.WeekNrFlowerStart >= FormWeekNrFlowerStart
                                orderby prod.Name
                                select prod);
             }
@@ -51,7 +51,7 @@ namespace startProject.Pages
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerEnd"]))
             {
                 queryResult = (from prod in this._context.Products
-                               where prod.WeekNrFlowerEnd == FormWeekNrFlowerEnd
+                               where prod.WeekNrFlowerEnd <= FormWeekNrFlowerEnd
                                orderby prod.Name
                                select prod);
             }
@@ -59,7 +59,7 @@ namespace startProject.Pages
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerStart"]) && !string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerEnd"]))
             {
                 queryResult = (from prod in this._context.Products
-                               where prod.WeekNrFlowerStart == FormWeekNrFlowerStart && prod.WeekNrFlowerEnd == FormWeekNrFlowerEnd
+                               where prod.WeekNrFlowerStart >= FormWeekNrFlowerStart && prod.WeekNrFlowerEnd <= FormWeekNrFlowerEnd
                                orderby prod.Name
                                select prod);
             }
