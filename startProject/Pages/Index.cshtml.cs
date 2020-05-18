@@ -34,18 +34,15 @@ namespace startProject.Pages
 
         public bool CheckWeekNrFlowerEnd { get; set; }
 
-
         public async Task OnGetAsync()
         {
-            MyProductList = await _context.Products.ToListAsync();
-
-            var queryResult = (from prod in MyProductList
+            var queryResult = (from prod in this._context.Products
                                orderby prod.Name
                                select prod);
 
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerStart"]))
             {
-                queryResult = (from prod in this.MyProductList
+                queryResult = (from prod in this._context.Products
                                where prod.WeekNrFlowerStart == FormWeekNrFlowerStart
                                orderby prod.Name
                                select prod);
@@ -53,7 +50,7 @@ namespace startProject.Pages
 
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerEnd"]))
             {
-                queryResult = (from prod in this.MyProductList
+                queryResult = (from prod in this._context.Products
                                where prod.WeekNrFlowerEnd == FormWeekNrFlowerEnd
                                orderby prod.Name
                                select prod);
@@ -61,7 +58,7 @@ namespace startProject.Pages
 
             if (!string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerStart"]) && !string.IsNullOrEmpty(Request.Query["FormWeekNrFlowerEnd"]))
             {
-                queryResult = (from prod in this.MyProductList
+                queryResult = (from prod in this._context.Products
                                where prod.WeekNrFlowerStart == FormWeekNrFlowerStart && prod.WeekNrFlowerEnd == FormWeekNrFlowerEnd
                                orderby prod.Name
                                select prod);
@@ -80,7 +77,7 @@ namespace startProject.Pages
                 queryResult = queryResult.OrderBy(q => q.WeekNrFlowerStart).ThenBy(q => q.WeekNrFlowerEnd).ThenBy(q => q.Name);
             }
 
-            ResultProducts = queryResult.ToArray();
+            ResultProducts = await queryResult.ToArrayAsync();
         }
     }
 }
