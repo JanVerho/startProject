@@ -18,8 +18,8 @@ namespace startProject.Pages
 
         public IndexModel(ILogger<IndexModel> logger, StartProjectContext context)
         {
-            _logger = logger;
-            _context = context;
+            this._logger = logger;
+            this._context = context;
         }
 
         public Product[] ResultProducts { get; set; }
@@ -39,45 +39,14 @@ namespace startProject.Pages
         public async Task OnGetAsync()
         {
             //Add value to var:
-            string inputWeekNrFlowerStart = Request.Query["FormWeekNrFlowerStart"];
-            string inputWeekNrFlowerEnd = Request.Query["FormWeekNrFlowerEnd"];
-            CheckWeekNrFlowerStart = !string.IsNullOrEmpty(Request.Query["CheckWeekNrFlowerStart"]);
-            CheckWeekNrFlowerEnd = !string.IsNullOrEmpty(Request.Query["CheckWeekNrFlowerEnd"]);
+            string inputWeekNrFlowerStart = this.Request.Query["FormWeekNrFlowerStart"];
+            string inputWeekNrFlowerEnd = this.Request.Query["FormWeekNrFlowerEnd"];
+            this.CheckWeekNrFlowerStart = !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerStart"]);
+            this.CheckWeekNrFlowerEnd = !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerEnd"]);
 
             Filter filter = new Filter(this._context.Products);
 
-            var queryResult = this._context.Products.Select(p => p);
-
-            //Filtering
-            if (!string.IsNullOrEmpty(inputWeekNrFlowerStart))
-            {
-                queryResult = queryResult.Where(q => q.WeekNrFlowerStart >= FormWeekNrFlowerStart);
-            }
-
-            if (!string.IsNullOrEmpty(inputWeekNrFlowerEnd))
-            {
-                queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= FormWeekNrFlowerEnd);
-            }
-
-            //Sorting
-            if (CheckWeekNrFlowerStart && !CheckWeekNrFlowerEnd)
-            {
-                queryResult = queryResult.OrderBy(q => q.WeekNrFlowerStart).ThenBy(q => q.Name);
-            }
-            else if (!CheckWeekNrFlowerStart && CheckWeekNrFlowerEnd)
-            {
-                queryResult = queryResult.OrderBy(q => q.WeekNrFlowerEnd).ThenBy(q => q.Name);
-            }
-            else if (CheckWeekNrFlowerStart && CheckWeekNrFlowerEnd)
-            {
-                queryResult = queryResult.OrderBy(q => q.WeekNrFlowerStart).ThenBy(q => q.WeekNrFlowerEnd).ThenBy(q => q.Name);
-            }
-            else
-            {
-                queryResult = queryResult.OrderBy(q => q.Name);
-            }
-
-            ResultProducts = await queryResult.ToArrayAsync();
+            this.ResultProducts = filter.GetProducts(inputWeekNrFlowerStart, inputWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArray();
         }
     }
 }
