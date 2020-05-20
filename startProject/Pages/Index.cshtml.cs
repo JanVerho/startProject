@@ -46,9 +46,9 @@ namespace startProject.Pages
 
             Filter filter = new Filter(this._context.Products);
 
-            var getProductsTask = Task.Run(() => filter.GetProducts(inputWeekNrFlowerStart, inputWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArray());
+            var GetProductsTask = Task.Run(() => filter.GetProducts(inputWeekNrFlowerStart, inputWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArray());
 
-            this.ResultProducts = await getProductsTask;
+            this.ResultProducts = await GetProductsTask;
         }
     }
 }
