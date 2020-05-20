@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using startProject.Model;
 
@@ -19,10 +22,20 @@ namespace startProject.Logic
             ProductList = productList;
         }
 
-        public IEnumerable<Product> GetProducts(string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd, bool CheckWeekNrFlowerStart, bool CheckWeekNrFlowerEnd)
+        public IEnumerable<Product> GetProducts(string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
         {
             var queryResult = ProductList.Select(p => p);
             //Filtering
+            queryResult = ComposeFilterPartQuery(queryResult, inputWeekNrFlowerStart, inputWeekNrFlowerEnd);
+
+            //Sorting
+            queryResult = ComposeSortPartQuery(queryResult, checkWeekNrFlowerStart, checkWeekNrFlowerEnd);
+
+            return queryResult;
+        }
+
+        private IEnumerable<Product> ComposeFilterPartQuery(IEnumerable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
+        {
             if (!string.IsNullOrEmpty(inputWeekNrFlowerStart))
             {
                 queryResult = queryResult.Where(q => q.WeekNrFlowerStart >= int.Parse(inputWeekNrFlowerStart));
@@ -32,17 +45,20 @@ namespace startProject.Logic
             {
                 queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= int.Parse(inputWeekNrFlowerEnd));
             }
+            return queryResult;
+        }
 
-            //Sorting
-            if (CheckWeekNrFlowerStart && !CheckWeekNrFlowerEnd)
+        private IEnumerable<Product> ComposeSortPartQuery(IEnumerable<Product> queryResult, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
+        {
+            if (checkWeekNrFlowerStart && !checkWeekNrFlowerEnd)
             {
                 queryResult = queryResult.OrderBy(q => q.WeekNrFlowerStart).ThenBy(q => q.Name);
             }
-            else if (!CheckWeekNrFlowerStart && CheckWeekNrFlowerEnd)
+            else if (!checkWeekNrFlowerStart && checkWeekNrFlowerEnd)
             {
                 queryResult = queryResult.OrderBy(q => q.WeekNrFlowerEnd).ThenBy(q => q.Name);
             }
-            else if (CheckWeekNrFlowerStart && CheckWeekNrFlowerEnd)
+            else if (checkWeekNrFlowerStart && checkWeekNrFlowerEnd)
             {
                 queryResult = queryResult.OrderBy(q => q.WeekNrFlowerStart).ThenBy(q => q.WeekNrFlowerEnd).ThenBy(q => q.Name);
             }
@@ -50,7 +66,6 @@ namespace startProject.Logic
             {
                 queryResult = queryResult.OrderBy(q => q.Name);
             }
-
             return queryResult;
         }
     }
