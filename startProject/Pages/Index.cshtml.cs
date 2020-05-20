@@ -25,28 +25,30 @@ namespace startProject.Pages
         public Product[] ResultProducts { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int FormWeekNrFlowerStart { get; set; }
+        public string FormWeekNrFlowerStart { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int FormWeekNrFlowerEnd { get; set; }
+        public string FormWeekNrFlowerEnd { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public bool CheckWeekNrFlowerStart { get; set; }
+        public bool CheckWeekNrFlowerStart
+        {
+            get { return !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerStart"]); }
+            set { }
+        }
 
         [BindProperty(SupportsGet = true)]
-        public bool CheckWeekNrFlowerEnd { get; set; }
+        public bool CheckWeekNrFlowerEnd
+        {
+            get { return !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerEnd"]); }
+            set { }
+        }
 
         public async Task OnGetAsync()
         {
-            //Add value to var:
-            string inputWeekNrFlowerStart = this.Request.Query["FormWeekNrFlowerStart"];
-            string inputWeekNrFlowerEnd = this.Request.Query["FormWeekNrFlowerEnd"];
-            this.CheckWeekNrFlowerStart = !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerStart"]);
-            this.CheckWeekNrFlowerEnd = !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerEnd"]);
-
             Filter filter = new Filter(this._context.Products);
 
-            var GetProductsTask = Task.Run(() => filter.GetProducts(inputWeekNrFlowerStart, inputWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArray());
+            var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArray());
 
             this.ResultProducts = await GetProductsTask;
         }
