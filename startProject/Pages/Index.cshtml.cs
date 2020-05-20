@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using startProject.Data;
+using startProject.Logic;
 using startProject.Model;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using startProject.Logic;
-using startProject.Data;
 
 namespace startProject.Pages
 {
