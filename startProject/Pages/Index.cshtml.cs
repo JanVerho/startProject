@@ -11,12 +11,10 @@ namespace startProject.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
         private readonly StartProjectContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger, StartProjectContext context)
+        public IndexModel(StartProjectContext context)
         {
-            this._logger = logger;
             this._context = context;
         }
 
