@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using startProject.Model;
+using startProject.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,9 +9,9 @@ namespace startProject
 {
     public class IndexModel : PageModel
     {
-        private readonly startProject.Data.StartProjectContext _context;
+        private readonly StartProjectContext _context;
 
-        public IndexModel(startProject.Data.StartProjectContext context)
+        public IndexModel(StartProjectContext context)
         {
             _context = context;
         }
