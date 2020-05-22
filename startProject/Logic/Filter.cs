@@ -29,7 +29,7 @@ namespace startProject.Logic
             return queryResult;
         }
 
-        private IEnumerable<Product> ComposeFilterPartQuery(IEnumerable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
+        public IEnumerable<Product> ComposeFilterPartQuery(IEnumerable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
         {
             if (!string.IsNullOrEmpty(inputWeekNrFlowerStart))
             {
