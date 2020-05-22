@@ -106,5 +106,14 @@ namespace startProject.Logic.Tests
             CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 26 && q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(queryResult, "26", "40").ToArray());
             Assert.AreEqual(0, filter.ComposeFilterPartQuery(queryResult, "26", "40").ToArray().Length);
         }
+
+        [TestMethod()]
+        public void ComposeFilterPartQueryTest_Input_Not_Number()
+        {
+            Filter filter = new Filter(FilterTests.testProducts);
+            var queryResult = testProducts.Select(p => p);
+
+            Assert.AreEqual(10, filter.ComposeFilterPartQuery(queryResult, "a", "++").ToArray().Length);
+        }
     }
 }
