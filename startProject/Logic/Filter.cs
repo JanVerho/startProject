@@ -31,14 +31,14 @@ namespace startProject.Logic
 
         public IEnumerable<Product> ComposeFilterPartQuery(IEnumerable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
         {
-            if (!string.IsNullOrEmpty(inputWeekNrFlowerStart) && int.TryParse(inputWeekNrFlowerStart, out int resultStart))
+            if (!string.IsNullOrEmpty(inputWeekNrFlowerStart) /*&& int.TryParse(inputWeekNrFlowerStart, out int resultStart)*/)
             {
-                queryResult = queryResult.Where(q => q.WeekNrFlowerStart >= resultStart);
+                queryResult = queryResult.Where(q => q.WeekNrFlowerStart >= int.Parse(inputWeekNrFlowerStart));
             }
 
-            if (!string.IsNullOrEmpty(inputWeekNrFlowerEnd) && int.TryParse(inputWeekNrFlowerStart, out int resultEnd))
+            if (!string.IsNullOrEmpty(inputWeekNrFlowerEnd) /*&& int.TryParse(inputWeekNrFlowerStart, out int resultEnd)*/)
             {
-                queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= resultEnd);
+                queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= int.Parse(inputWeekNrFlowerEnd));
             }
             return queryResult;
         }
