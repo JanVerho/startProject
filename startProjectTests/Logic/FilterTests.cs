@@ -38,14 +38,6 @@ namespace startProject.Logic.Tests
         {
             Filter filter = new Filter(this.testProducts);
             Assert.IsNotNull(filter.ProductList);
-            Assert.AreEqual(10, filter.ProductList.Count());
-            CollectionAssert.AreEqual(this.testProducts, filter.ProductList.ToArray());
-            Assert.AreEqual("Bloem_1", filter.ProductList.Select(p => p.Name).First());
-            Assert.AreEqual("Bloem_10", filter.ProductList.Select(p => p.Name).Last());
-            Assert.AreEqual(8, filter.ProductList.Select(p => p.WeekNrFlowerStart).ElementAt(1));
-            Assert.AreEqual(20, filter.ProductList.Select(p => p.WeekNrFlowerStart).ElementAt(8));
-            Assert.AreEqual(10, filter.ProductList.Select(p => p.WeekNrFlowerEnd).ElementAt(2));
-            Assert.AreEqual(42, filter.ProductList.Select(p => p.WeekNrFlowerEnd).ElementAt(7));
             CollectionAssert.AreEqual(this.testProducts, filter.ProductList.ToArray());
         }
 
