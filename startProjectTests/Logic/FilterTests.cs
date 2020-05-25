@@ -58,11 +58,13 @@ namespace startProject.Logic.Tests
             CollectionAssert.AreEqual(products, filter.ComposeFilterPartQuery(products, "25", "").ToArray());
             CollectionAssert.AreEqual(emptyArrayProducts, filter.ComposeFilterPartQuery(products, "26", "").ToArray());
 
-            Product[] twoProducts = { new Product(1, "Bloem_1", 25, 40),
-                                     new Product(2, "Bloem_2", 20, 40)};
+            var bloem_1 = new Product(1, "Bloem_1", 25, 40);
+            var bloem_2 = new Product(2, "Bloem_2", 20, 40);
+            Product[] twoProducts = { bloem_1, bloem_2 };
             Filter filter_2 = new Filter(twoProducts);
             CollectionAssert.AreEqual(twoProducts, filter_2.ComposeFilterPartQuery(twoProducts, "10", "").ToArray());
-            Assert.AreEqual(1, filter_2.ComposeFilterPartQuery(twoProducts, "25", "").ToArray().Length);
+            Product[] expectedProducts = { bloem_1 };
+            CollectionAssert.AreEqual(expectedProducts, filter_2.ComposeFilterPartQuery(twoProducts, "25", "").ToArray());
             CollectionAssert.AreEqual(emptyArrayProducts, filter_2.ComposeFilterPartQuery(twoProducts, "26", "").ToArray());
         }
 
@@ -76,12 +78,14 @@ namespace startProject.Logic.Tests
             CollectionAssert.AreEqual(products, filter.ComposeFilterPartQuery(products, "", "42").ToArray());
             CollectionAssert.AreEqual(products, filter.ComposeFilterPartQuery(products, "", "40").ToArray());
 
-            Product[] twoProducts = { new Product(1, "Bloem_1", 25, 40),
-                                     new Product(2, "Bloem_2", 20, 30)};
+            var bloem_1 = new Product(1, "Bloem_1", 25, 40);
+            var bloem_2 = new Product(2, "Bloem_2", 20, 30);
+            Product[] twoProducts = { bloem_1, bloem_2 };
             Filter filter_2 = new Filter(twoProducts);
             CollectionAssert.AreEqual(twoProducts, filter_2.ComposeFilterPartQuery(twoProducts, "", "40").ToArray());
             CollectionAssert.AreEqual(twoProducts, filter_2.ComposeFilterPartQuery(twoProducts, "", "42").ToArray());
-            Assert.AreEqual(1, filter_2.ComposeFilterPartQuery(twoProducts, "", "30").ToArray().Length);
+            Product[] expectedProducts = { bloem_2 };
+            CollectionAssert.AreEqual(expectedProducts, filter_2.ComposeFilterPartQuery(twoProducts, "", "30").ToArray());
             CollectionAssert.AreEqual(emptyArrayProducts, filter_2.ComposeFilterPartQuery(twoProducts, "", "29").ToArray());
         }
 
