@@ -11,7 +11,7 @@ namespace startProject.Logic.Tests
     [TestClass()]
     public class FilterTests
     {
-        public static Product[] testProducts = {
+        private readonly Product[] testProducts = {
                 new Product(1, "Bloem_1", 8, 15),
                 new Product(2, "Bloem_2", 8, 20),
                 new Product(3, "Bloem_3", 8, 10),
@@ -28,92 +28,85 @@ namespace startProject.Logic.Tests
         public void Filter_Test_Constructor_NoParam()
         {
             Filter filter = new Filter();
-            Assert.IsNotNull(filter);
             Assert.IsNull(filter.ProductList);
-            filter.ProductList = FilterTests.testProducts;
+            filter.ProductList = this.testProducts;
             Assert.IsNotNull(filter.ProductList);
         }
 
         [TestMethod()]
         public void Filter_Test_Constructor_WithParam()
         {
-            Filter filter = new Filter(FilterTests.testProducts);
+            Filter filter = new Filter(this.testProducts);
             Assert.IsNotNull(filter.ProductList);
             Assert.AreEqual(10, filter.ProductList.Count());
-            CollectionAssert.AreEqual(FilterTests.testProducts, filter.ProductList.ToArray());
+            CollectionAssert.AreEqual(this.testProducts, filter.ProductList.ToArray());
             Assert.AreEqual("Bloem_1", filter.ProductList.Select(p => p.Name).First());
             Assert.AreEqual("Bloem_10", filter.ProductList.Select(p => p.Name).Last());
             Assert.AreEqual(8, filter.ProductList.Select(p => p.WeekNrFlowerStart).ElementAt(1));
             Assert.AreEqual(20, filter.ProductList.Select(p => p.WeekNrFlowerStart).ElementAt(8));
             Assert.AreEqual(10, filter.ProductList.Select(p => p.WeekNrFlowerEnd).ElementAt(2));
             Assert.AreEqual(42, filter.ProductList.Select(p => p.WeekNrFlowerEnd).ElementAt(7));
-            CollectionAssert.AreEqual(FilterTests.testProducts, filter.ProductList.ToArray());
+            CollectionAssert.AreEqual(this.testProducts, filter.ProductList.ToArray());
         }
 
         [TestMethod()]
         public void ComposeFilterPartQuery_Test_Inputs_IsNullOrEpmpty()
         {
-            Filter filter = new Filter(FilterTests.testProducts);
-            var queryResult = testProducts.Select(p => p);
-            CollectionAssert.AreEqual(testProducts, filter.ComposeFilterPartQuery(queryResult, "", "").ToArray());
-            Assert.AreEqual(10, filter.ComposeFilterPartQuery(queryResult, "", "").ToArray().Length);
+            Filter filter = new Filter(this.testProducts);
+            CollectionAssert.AreEqual(testProducts, filter.ComposeFilterPartQuery(this.testProducts, "", "").ToArray());
+            Assert.AreEqual(10, filter.ComposeFilterPartQuery(this.testProducts, "", "").ToArray().Length);
         }
 
         [TestMethod()]
         public void ComposeFilterPartQueryTest_Input_inputWeekNrFlowerEnd_IsNullOrEpmpty()
         {
-            Filter filter = new Filter(FilterTests.testProducts);
-            var queryResult = testProducts.Select(p => p);
+            Filter filter = new Filter(this.testProducts);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 20).ToArray(), filter.ComposeFilterPartQuery(queryResult, "20", "").ToArray());
-            Assert.AreEqual(5, filter.ComposeFilterPartQuery(queryResult, "20", "").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 20).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "20", "").ToArray());
+            Assert.AreEqual(5, filter.ComposeFilterPartQuery(this.testProducts, "20", "").ToArray().Length);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 21).ToArray(), filter.ComposeFilterPartQuery(queryResult, "21", "").ToArray());
-            Assert.AreEqual(3, filter.ComposeFilterPartQuery(queryResult, "21", "").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 21).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "21", "").ToArray());
+            Assert.AreEqual(3, filter.ComposeFilterPartQuery(this.testProducts, "21", "").ToArray().Length);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 9).ToArray(), filter.ComposeFilterPartQuery(queryResult, "9", "").ToArray());
-            Assert.AreEqual(7, filter.ComposeFilterPartQuery(queryResult, "9", "").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 9).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "9", "").ToArray());
+            Assert.AreEqual(7, filter.ComposeFilterPartQuery(this.testProducts, "9", "").ToArray().Length);
         }
 
         [TestMethod()]
         public void ComposeFilterPartQueryTest_Input_inputWeekNrFlowerStart_IsNullOrEpmpty()
         {
-            Filter filter = new Filter(FilterTests.testProducts);
-            var queryResult = testProducts.Select(p => p);
+            Filter filter = new Filter(this.testProducts);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerEnd <= 20).ToArray(), filter.ComposeFilterPartQuery(queryResult, "", "20").ToArray());
-            Assert.AreEqual(3, filter.ComposeFilterPartQuery(queryResult, "", "20").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerEnd <= 20).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "", "20").ToArray());
+            Assert.AreEqual(3, filter.ComposeFilterPartQuery(this.testProducts, "", "20").ToArray().Length);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerEnd <= 21).ToArray(), filter.ComposeFilterPartQuery(queryResult, "", "21").ToArray());
-            Assert.AreEqual(3, filter.ComposeFilterPartQuery(queryResult, "", "21").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerEnd <= 21).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "", "21").ToArray());
+            Assert.AreEqual(3, filter.ComposeFilterPartQuery(this.testProducts, "", "21").ToArray().Length);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(queryResult, "", "40").ToArray());
-            Assert.AreEqual(8, filter.ComposeFilterPartQuery(queryResult, "", "40").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "", "40").ToArray());
+            Assert.AreEqual(8, filter.ComposeFilterPartQuery(this.testProducts, "", "40").ToArray().Length);
         }
 
         [TestMethod()]
         public void ComposeFilterPartQueryTest_Input_Not_IsNullOrEpmpty()
         {
-            Filter filter = new Filter(FilterTests.testProducts);
-            var queryResult = testProducts.Select(p => p);
+            Filter filter = new Filter(this.testProducts);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 20 && q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(queryResult, "20", "40").ToArray());
-            Assert.AreEqual(4, filter.ComposeFilterPartQuery(queryResult, "20", "40").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 20 && q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "20", "40").ToArray());
+            Assert.AreEqual(4, filter.ComposeFilterPartQuery(this.testProducts, "20", "40").ToArray().Length);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 8 && q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(queryResult, "8", "40").ToArray());
-            Assert.AreEqual(8, filter.ComposeFilterPartQuery(queryResult, "8", "40").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 8 && q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "8", "40").ToArray());
+            Assert.AreEqual(8, filter.ComposeFilterPartQuery(this.testProducts, "8", "40").ToArray().Length);
 
-            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 26 && q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(queryResult, "26", "40").ToArray());
-            Assert.AreEqual(0, filter.ComposeFilterPartQuery(queryResult, "26", "40").ToArray().Length);
+            CollectionAssert.AreEqual(testProducts.Select(p => p).Where(q => q.WeekNrFlowerStart >= 26 && q.WeekNrFlowerEnd <= 40).ToArray(), filter.ComposeFilterPartQuery(this.testProducts, "26", "40").ToArray());
+            Assert.AreEqual(0, filter.ComposeFilterPartQuery(this.testProducts, "26", "40").ToArray().Length);
         }
 
         [TestMethod()]
         public void ComposeFilterPartQueryTest_Input_Not_Number()
         {
-            Filter filter = new Filter(FilterTests.testProducts);
-            var queryResult = testProducts.Select(p => p);
-
-            Assert.AreEqual(10, filter.ComposeFilterPartQuery(queryResult, "a", "++").ToArray().Length);
+            Filter filter = new Filter(this.testProducts);
+            Assert.AreEqual(10, filter.ComposeFilterPartQuery(this.testProducts, "a", "++").ToArray().Length);
         }
     }
 }
