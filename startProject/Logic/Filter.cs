@@ -43,7 +43,7 @@ namespace startProject.Logic
             return queryResult.AsQueryable();
         }
 
-        private IQueryable<Product> ComposeSortPartQuery(IEnumerable<Product> queryResult, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
+        public IQueryable<Product> ComposeSortPartQuery(IEnumerable<Product> queryResult, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
         {
             if (checkWeekNrFlowerStart && !checkWeekNrFlowerEnd)
             {

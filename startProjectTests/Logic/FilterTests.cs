@@ -118,6 +118,46 @@ namespace startProject.Logic.Tests
             CollectionAssert.AreEqual(expectedProducts_3, filter.ComposeFilterPartQuery(allProducts, "26", "40").ToArray());
         }
 
+        [TestMethod()]
+        public void ComposeSortPartQueryTest()
+        {
+            var bloem_1 = new Product(1, "Bloem_1", 1, 52);
+            var bloem_2 = new Product(2, "Bloem_2", 2, 50);
+            var bloem_3 = new Product(3, "Bloem_3", 1, 51);
+
+            Product[] testProducts = { bloem_3, bloem_2, bloem_1 };
+            Product[] expectedProducts_OrderByName = { bloem_1, bloem_2, bloem_3 };
+            Filter filter = new Filter(testProducts.AsQueryable<Product>());
+
+            CollectionAssert.AreEqual(expectedProducts_OrderByName, filter.ComposeSortPartQuery(testProducts, false, false).ToArray());
+
+            Product[] expectedProducts_OrderByStart_ThenByName = { bloem_1, bloem_3, bloem_2 };
+            CollectionAssert.AreEqual(expectedProducts_OrderByStart_ThenByName, filter.ComposeSortPartQuery(testProducts, true, false).ToArray());
+
+            Product[] expectedProducts_OrderByEnd_ThenByName = { bloem_2, bloem_3, bloem_1 };
+            CollectionAssert.AreEqual(expectedProducts_OrderByEnd_ThenByName, filter.ComposeSortPartQuery(testProducts, false, true).ToArray());
+
+            Product[] expectedProducts_OrderByStart_ThenByEnd_ThenByName = { bloem_3, bloem_1, bloem_2 };
+            CollectionAssert.AreEqual(expectedProducts_OrderByStart_ThenByEnd_ThenByName, filter.ComposeSortPartQuery(testProducts, true, true).ToArray());
+        }
+
+        [TestMethod()]
+        public void GetProductsTest()
+        {
+            var bloem_1 = new Product(1, "Bloem_1", 1, 52);
+            var bloem_2 = new Product(2, "Bloem_2", 2, 51);
+            var bloem_3 = new Product(3, "Bloem_3", 1, 51);
+
+            Product[] testProducts = { bloem_1, bloem_2, bloem_3 };
+            Filter filter = new Filter(testProducts.AsQueryable<Product>());
+
+            Assert.AreEqual(3, filter.GetProducts("", "", false, false).ToArray().Length);
+            Assert.AreEqual(1, filter.GetProducts("2", "", true, true).ToArray().Length);
+            Assert.AreEqual(3, filter.GetProducts("", "52", true, false).ToArray().Length);
+            Assert.AreEqual(1, filter.GetProducts("2", "52", false, true).ToArray().Length);
+            Assert.AreEqual(0, filter.GetProducts("5", "45", false, false).ToArray().Length);
+        }
+
         /* [TestMethod()]
          public void ComposeFilterPartQueryTest_Input_Not_Number()
          {

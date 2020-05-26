@@ -48,7 +48,8 @@ namespace startProject.Pages
 
             var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
 
-            Product[] product = await GetProductsTask.ToArrayAsync();
+            //Product[] product = await GetProductsTask.ToArrayAsync(); om verder te kunnen
+            Product[] product = GetProductsTask.ToArray();
             this.ResultProducts = product;
 
             /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
