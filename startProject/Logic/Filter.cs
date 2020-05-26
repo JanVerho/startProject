@@ -6,18 +6,18 @@ namespace startProject.Logic
 {
     public class Filter
     {
-        public IEnumerable<Product> ProductList { get; set; }
+        public IQueryable<Product> ProductList { get; set; }
 
         public Filter()
         {
         }
 
-        public Filter(IEnumerable<Product> productList)
+        public Filter(IQueryable<Product> productList)
         {
             ProductList = productList;
         }
 
-        public IEnumerable<Product> GetProducts(string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
+        public IQueryable<Product> GetProducts(string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
         {
             var queryResult = ProductList.Select(p => p);
             //Filtering
@@ -29,7 +29,7 @@ namespace startProject.Logic
             return queryResult;
         }
 
-        public IEnumerable<Product> ComposeFilterPartQuery(IEnumerable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
+        public IQueryable<Product> ComposeFilterPartQuery(IEnumerable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
         {
             if (!string.IsNullOrEmpty(inputWeekNrFlowerStart) /*&& int.TryParse(inputWeekNrFlowerStart, out int resultStart)*/)
             {
@@ -40,10 +40,10 @@ namespace startProject.Logic
             {
                 queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= int.Parse(inputWeekNrFlowerEnd));
             }
-            return queryResult;
+            return queryResult.AsQueryable();
         }
 
-        private IEnumerable<Product> ComposeSortPartQuery(IEnumerable<Product> queryResult, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
+        private IQueryable<Product> ComposeSortPartQuery(IEnumerable<Product> queryResult, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
         {
             if (checkWeekNrFlowerStart && !checkWeekNrFlowerEnd)
             {
@@ -61,7 +61,7 @@ namespace startProject.Logic
             {
                 queryResult = queryResult.OrderBy(q => q.Name);
             }
-            return queryResult;
+            return queryResult.AsQueryable();
         }
     }
 }
