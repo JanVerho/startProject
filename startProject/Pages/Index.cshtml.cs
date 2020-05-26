@@ -23,6 +23,14 @@ namespace startProject.Pages
         public Product[] ResultProducts { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        public int SelectedProductNumber { get; set; } = -1;
+
+        [BindProperty(SupportsGet = true)]
+        public OrderLine OrderLine { get; set; } = new OrderLine(1);
+
+        public OrderLine[] NewOrderLinesArray { get; set; } = new OrderLine[] { };
+
+        [BindProperty(SupportsGet = true)]
         public string FormWeekNrFlowerStart { get; set; }
 
         [BindProperty(SupportsGet = true)]

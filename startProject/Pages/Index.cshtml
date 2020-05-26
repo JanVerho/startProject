@@ -54,5 +54,39 @@
         </label>
         <input type="checkbox" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
     </div>
-    <input type="submit" value="Filteren(met Get)" />
+    <input type="submit" class="btn btn-primary" value="Filteren(met Get)" />
+</form>
+
+<form method="post">
+    <div class="formfield">
+
+        <!--h1>Html.DisplayNameFor(model => model.NewOrderLinesArray[0].Product.Name)</h1-->
+        <label>Kies een product: </label>
+
+        <select asp-for="SelectedProductNumber" class="form-control" required>
+            <option value="">Kies een productNr.</option>
+            @foreach (var prod in Model.ResultProducts)
+            {
+                if (prod.Id == Model.SelectedProductNumber)
+                {
+                    @:<option class="form-control" selected value="@prod.Id">@prod.Name</option>
+                }
+                else
+                {
+                    @:<option class="form-control" value="@prod.Id">@prod.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="SelectedProductNumber" class="text-danger"></span>
+
+        <!--h1>Html.DisplayNameFor(model => model.NewOrderLinesArray[0].Quantity)</h1-->
+        <label>Geef hier aantal mee: </label>
+        <input asp-for="OrderLine.Quantity" type="number" max="100" min="0" class="form-control" autofocus />
+        <span asp-validation-for="OrderLine.Quantity" class="text-danger"></span>
+    </div>
+    <br />
+
+    <div class="formfield">
+        <button asp-page-handler="OrdersBetaald" class="btn btn-primary">Maak orderline aan</button>
+    </div>
 </form>
