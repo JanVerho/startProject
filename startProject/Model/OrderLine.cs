@@ -16,9 +16,8 @@ namespace startProject.Model
         [Required(AllowEmptyStrings = false, ErrorMessage = "'{0}' is verplicht.")]
         public int Quantity { get; set; }
 
-        [ForeignKey("ProductId")]
         [Range(0, 10, ErrorMessage = "'{0' waarde is niet in lijst")]
-        public Product Product { get; set; }
+        public string ProductName { get; set; }
 
         public List<OrderLine> OrderLinesList { get; set; }
 
@@ -27,14 +26,9 @@ namespace startProject.Model
         {
         }
 
-        public OrderLine(int quantityOrdered)
+        public OrderLine(string productName, int orderQuantity)
         {
-            this.Quantity = quantityOrdered;
-        }
-
-        public OrderLine(Product product, int orderQuantity)
-        {
-            this.Product = product;
+            this.ProductName = productName;
             this.Quantity = orderQuantity;
         }
     }
