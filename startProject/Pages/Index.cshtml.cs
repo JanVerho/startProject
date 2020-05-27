@@ -20,6 +20,8 @@ namespace startProject.Pages
             this._context = context;
         }
 
+        public string Message { get; set; } = "Nog geen OrderLine aangemaakt";
+
         public Product[] ResultProducts { get; set; }
 
         [BindProperty(SupportsGet = true)]
@@ -63,6 +65,25 @@ namespace startProject.Pages
             /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
 
             this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
+
+            Message = "OnPostCreateOrderLine gebruikt";
+        }
+
+        public async Task OnPostCreateOrderLineAsync()
+        {
+            Filter filter = new Filter(this._context.Products);
+
+            var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
+
+            //Product[] product = await GetProductsTask.ToArrayAsync(); om verder te kunnen
+            Product[] product = GetProductsTask.ToArray();
+            this.ResultProducts = product;
+
+            /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
+
+            this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
+
+            Message = "OnPostCreateOrderLine gebruikt";
         }
     }
 }
