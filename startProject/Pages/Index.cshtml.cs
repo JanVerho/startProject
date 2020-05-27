@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using startProject.Data;
 using startProject.Logic;
 using startProject.Model;
@@ -23,9 +22,6 @@ namespace startProject.Pages
         public string Message { get; set; } = "Nog geen OrderLine aangemaakt";
 
         public Product[] ResultProducts { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public int SelectedProductNumber { get; set; } = -1;
 
         [BindProperty(SupportsGet = true)]
         public OrderLine OrderLine { get; set; }

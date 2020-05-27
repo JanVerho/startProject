@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using startProject.Model;
 using startProject.Data;
+using startProject.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
