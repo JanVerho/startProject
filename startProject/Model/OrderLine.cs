@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +19,8 @@ namespace startProject.Model
         [ForeignKey("ProductId")]
         [Range(0, 10, ErrorMessage = "'{0' waarde is niet in lijst")]
         public Product Product { get; set; }
+
+        public List<OrderLine> OrderLinesList { get; set; }
 
         // constructors
         public OrderLine()
