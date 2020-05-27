@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using startProject.Data;
 using startProject.Logic;
 using startProject.Model;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,9 +28,7 @@ namespace startProject.Pages
         public int SelectedProductNumber { get; set; } = -1;
 
         [BindProperty(SupportsGet = true)]
-        public OrderLine OrderLine { get; set; } = new OrderLine(1);
-
-        public OrderLine[] NewOrderLinesArray { get; set; } = new OrderLine[] { };
+        public OrderLine OrderLine { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string FormWeekNrFlowerStart { get; set; }
@@ -83,7 +81,20 @@ namespace startProject.Pages
 
             this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
 
-            Message = "OnPostCreateOrderLine gebruikt";
+            var query = from prod in this._context.Products
+                        where prod.Id == OrderLine.Id
+                        select prod.Name;
+            string result = await query.FirstOrDefaultAsync();
+            OrderLine orderLine = new OrderLine(result, this.OrderLine.Quantity);
+            OrderLine.OrderLinesList.Add(orderLine);
+
+            string printResult = "";
+            foreach (var item in OrderLine.OrderLinesList)
+            {
+                printResult += item.ProductName + " " + item.Quantity + Environment.NewLine;
+            }
+
+            Message = "OnPostCreateOrderLine: " + orderLine.ProductName + " aantal: " + orderLine.Quantity.ToString() + " - PResult : " + printResult;
         }
     }
 }

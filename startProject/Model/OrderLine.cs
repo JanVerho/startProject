@@ -19,7 +19,7 @@ namespace startProject.Model
         [Range(0, 10, ErrorMessage = "'{0' waarde is niet in lijst")]
         public string ProductName { get; set; }
 
-        public List<OrderLine> OrderLinesList { get; set; }
+        public static List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
 
         // constructors
         public OrderLine()

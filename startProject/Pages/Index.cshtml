@@ -63,11 +63,11 @@
         <!--h1>Html.DisplayNameFor(model => model.NewOrderLinesArray[0].Product.Name)</h1-->
         <label>Kies een product: </label>
 
-        <select asp-for="SelectedProductNumber" class="form-control" required>
+        <select asp-for="OrderLine.Id" class="form-control" required>
             <option value="">Kies een productNr.</option>
             @foreach (var prod in Model.ResultProducts)
             {
-                if (prod.Id == Model.SelectedProductNumber)
+                if (prod.Id == Model.OrderLine.Id)
                 {
                     @:<option class="form-control" selected value="@prod.Id">@prod.Name</option>
                 }
@@ -77,7 +77,7 @@
                 }
             }
         </select>
-        <span asp-validation-for="SelectedProductNumber" class="text-danger"></span>
+        <span asp-validation-for="OrderLine.Id" class="text-danger"></span>
 
         <!--h1>Html.DisplayNameFor(model => model.NewOrderLinesArray[0].Quantity)</h1-->
         <label>Geef hier aantal mee: </label>
