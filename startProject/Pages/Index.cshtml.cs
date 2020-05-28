@@ -81,8 +81,12 @@ namespace startProject.Pages
         {
             Filter filter = new Filter(this._context.Products);
 
-            var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
-            return await GetProductsTask.ToArrayAsync();
+            /*var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
+            return await GetProductsTask.ToArrayAsync();*/
+
+            var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArray());
+
+            return await GetProductsTask;
         }
 
         private async Task<OrderLine> ComposeNewOrderLineAsync()
