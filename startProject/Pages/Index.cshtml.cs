@@ -48,16 +48,10 @@ namespace startProject.Pages
 
         public async Task OnGetAsync()
         {
-            Filter filter = new Filter(this._context.Products);
-
-            var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
-
-            //Product[] product = await GetProductsTask.ToArrayAsync(); om verder te kunnen
-            Product[] product = GetProductsTask.ToArray();
+            Product[] product = await Task<Product[]>.Run(() => this.ComposeProductListAsync());
             this.ResultProducts = product;
 
             /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
-
             this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
 
             Message = "OnPostCreateOrderLine gebruikt";
@@ -65,23 +59,13 @@ namespace startProject.Pages
 
         public async Task OnPostCreateOrderLineAsync()
         {
-            Filter filter = new Filter(this._context.Products);
-
-            var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
-
-            //Product[] product = await GetProductsTask.ToArrayAsync(); om verder te kunnen
-            Product[] product = GetProductsTask.ToArray();
+            Product[] product = await Task<Product[]>.Run(() => ComposeProductListAsync());
             this.ResultProducts = product;
 
             /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
-
             this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
 
-            var query = from prod in this._context.Products
-                        where prod.Id == OrderLine.Id
-                        select prod.Name;
-            string result = await query.FirstOrDefaultAsync();
-            OrderLine orderLine = new OrderLine(result, this.OrderLine.Quantity);
+            OrderLine orderLine = await Task<OrderLine>.Run(() => ComposeNewOrderLineAsync());
             OrderLine.OrderLinesList.Add(orderLine);
 
             string printResult = "";
@@ -91,6 +75,23 @@ namespace startProject.Pages
             }
 
             Message = "OnPostCreateOrderLine: " + orderLine.ProductName + " aantal: " + orderLine.Quantity.ToString() + " - PResult : " + printResult;
+        }
+
+        private async Task<Product[]> ComposeProductListAsync()
+        {
+            Filter filter = new Filter(this._context.Products);
+
+            var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
+            return await GetProductsTask.ToArrayAsync();
+        }
+
+        private async Task<OrderLine> ComposeNewOrderLineAsync()
+        {
+            var query = from prod in this._context.Products
+                        where prod.Id == OrderLine.Id
+                        select prod.Name;
+            string result = await query.FirstOrDefaultAsync();
+            return new OrderLine(result, this.OrderLine.Quantity);
         }
     }
 }
