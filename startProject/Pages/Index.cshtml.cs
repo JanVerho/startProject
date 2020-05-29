@@ -25,7 +25,6 @@ namespace startProject.Pages
         [BindProperty(SupportsGet = true)]
         public List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
 
-        [BindProperty(SupportsGet = true)]
         public Product[] ResultProducts { get; set; }
 
         [BindProperty(SupportsGet = true)]
@@ -90,9 +89,7 @@ namespace startProject.Pages
 
             return LocalRedirect("~/Index?OrderLinesList=" + this.OrderLinesList
                 + "&Quantity=" + this.OrderLine.Quantity
-                + "&OrderLine.Id=" + this.OrderLine.Id
-                + "&ResultProducts" + this.ResultProducts
-                );
+                + "&OrderLine.Id=" + this.OrderLine.Id);
         }
 
         private async Task<Product[]> ComposeProductListAsync()
