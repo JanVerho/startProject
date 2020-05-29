@@ -61,11 +61,16 @@ namespace startProject.Pages
 
             this.OrderLinesList = OrderLine.OrderLinesList;
 
-            Message = "OnGettCreateOrderLine gebruikt";
+            Message = "OnGetCreateOrderLine gebruikt";
         }
 
-        public async Task OnPostCreateOrderLineAsync()
+        public async Task<IActionResult> OnPostCreateOrderLineAsync()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             Product[] product = await Task<Product[]>.Run(() => ComposeProductListAsync());
             this.ResultProducts = product;
 
@@ -81,6 +86,11 @@ namespace startProject.Pages
             }
 
             Message = "OnPostCreateOrderLine: " + orderLine.ProductName + " aantal: " + orderLine.Quantity.ToString() + " - PResult : " + printResult;
+
+            return LocalRedirect("~/Index?OrderLinesList=" + this.OrderLinesList
+                + "&Quantity=" + this.OrderLine.Quantity
+                + "&OrderLine.Id=" + this.OrderLine.Id
+                );
         }
 
         private async Task<Product[]> ComposeProductListAsync()
