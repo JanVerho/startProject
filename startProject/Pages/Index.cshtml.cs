@@ -5,6 +5,7 @@ using startProject.Data;
 using startProject.Logic;
 using startProject.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,6 +21,8 @@ namespace startProject.Pages
         }
 
         public string Message { get; set; } = "Nog geen OrderLine aangemaakt";
+
+        public List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
 
         public Product[] ResultProducts { get; set; }
 
@@ -54,7 +57,9 @@ namespace startProject.Pages
             /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
             this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
 
-            Message = "OnPostCreateOrderLine gebruikt";
+            this.OrderLinesList = OrderLine.OrderLinesList;
+
+            Message = "OnGettCreateOrderLine gebruikt";
         }
 
         public async Task OnPostCreateOrderLineAsync()
@@ -66,10 +71,13 @@ namespace startProject.Pages
             this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
 
             OrderLine orderLine = await Task<OrderLine>.Run(() => ComposeNewOrderLineAsync());
-            OrderLine.OrderLinesList.Add(orderLine);
+
+            //OrderLine.OrderLinesList.Add(orderLine);
+            OrderLine.OrderLinesList.Insert(0, orderLine);
+            this.OrderLinesList = OrderLine.OrderLinesList;
 
             string printResult = "";
-            foreach (var item in OrderLine.OrderLinesList)
+            foreach (OrderLine item in this.OrderLinesList)
             {
                 printResult += item.ProductName + " " + item.Quantity + Environment.NewLine;
             }

@@ -90,4 +90,31 @@
         <button asp-page-handler="CreateOrderLine" class="btn btn-primary">Maak orderline aan</button>
     </div>
     <h3 class="clearfix">@Model.Message</h3>
+    <p>@Html.DisplayNameFor(model => model.OrderLinesList[0].ProductName) </p>
 </form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderLinesList[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderLinesList[0].Quantity)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderLinesList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
