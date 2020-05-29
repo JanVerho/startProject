@@ -83,7 +83,6 @@ namespace startProject.Pages
             return LocalRedirect("~/Index?OrderLinesList=" + this.OrderLinesList
                  + "&Quantity=" + this.OrderLine.Quantity
                  + "&OrderLine.Id=" + this.OrderLine.Id
-                 // + "&ResultProducts" + this.ResultProducts
                  );
         }
 
@@ -99,7 +98,7 @@ namespace startProject.Pages
         private async Task<OrderLine> ComposeNewOrderLineAsync()
         {
             var query = from prod in this._context.Products
-                        where prod.Id == OrderLine.Id
+                        where prod.Name == this.OrderLine.ProductName
                         select prod.Name;
             string result = await query.FirstOrDefaultAsync();
             return new OrderLine(result, this.OrderLine.Quantity);

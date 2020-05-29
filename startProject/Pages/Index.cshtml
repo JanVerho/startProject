@@ -61,22 +61,22 @@
     <div class="formfield">
 
         <h1>Kies een product: </h1>
-        <label asp-for="OrderLine.Id" class="control-label"></label>
-        <select asp-for="OrderLine.Id" class="form-control">
+        <label asp-for="OrderLine.ProductName" class="control-label"></label>
+        <select asp-for="OrderLine.ProductName" class="form-control">
             <option value="">Kies een productNr.</option>
             @foreach (var prod in Model.ResultProducts)
             {
-                if (prod.Id == Model.OrderLine.Id)
+                if (prod.Name == Model.OrderLine.ProductName)
                 {
-                    @:<option class="form-control" selected value="@prod.Id">@prod.Name</option>
+                    @:<option class="form-control" selected value="@prod.Name">@prod.Name</option>
                 }
                 else
                 {
-                    @:<option class="form-control" value="@prod.Id">@prod.Name</option>
+                    @:<option class="form-control" value="@prod.Name">@prod.Name</option>
                 }
             }
         </select>
-        <span asp-validation-for="OrderLine.Id" class="text-danger"></span>
+        <span asp-validation-for="OrderLine.ProductName" class="text-danger"></span>
 
         <h1>Geef hier aantal mee: </h1>
         <label asp-for="OrderLine.Quantity" class="control-label"></label>

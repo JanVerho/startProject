@@ -15,6 +15,8 @@ namespace startProject.Model
         [Required(AllowEmptyStrings = false, ErrorMessage = "'{0}' is verplicht.")]
         public int Quantity { get; set; } = 1;
 
+        [DisplayName("ProductName")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "'{0}' is verplicht.")]
         public string ProductName { get; set; }
 
         public static List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
