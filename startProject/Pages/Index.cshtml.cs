@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace startProject.Pages
 {
@@ -32,9 +34,11 @@ namespace startProject.Pages
         public OrderLine OrderLine { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        [Range(1, 52, ErrorMessage = "'{0}' moet min {1} en max {2} zijn .")]
         public string FormWeekNrFlowerStart { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        [Range(1, 52, ErrorMessage = "'{0}' moet min {1} en max {2} zijn .")]
         public string FormWeekNrFlowerEnd { get; set; }
 
         [BindProperty(SupportsGet = true)]
