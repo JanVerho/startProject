@@ -22,6 +22,7 @@ namespace startProject.Pages
 
         public string Message { get; set; } = "Nog geen OrderLine aangemaakt";
 
+        [BindProperty(SupportsGet = true)]
         public List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
 
         public Product[] ResultProducts { get; set; }
@@ -55,7 +56,8 @@ namespace startProject.Pages
             this.ResultProducts = product;
 
             /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
-            this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
+            this.ResultProducts = await GetProductsTask.ToArrayAsync();
+            WAIT FOR EVENTUAL NEW INPUT OF VERA*/
 
             this.OrderLinesList = OrderLine.OrderLinesList;
 
@@ -67,12 +69,8 @@ namespace startProject.Pages
             Product[] product = await Task<Product[]>.Run(() => ComposeProductListAsync());
             this.ResultProducts = product;
 
-            /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
-            this.ResultProducts = await GetProductsTask.ToArrayAsync();*/
-
             OrderLine orderLine = await Task<OrderLine>.Run(() => ComposeNewOrderLineAsync());
 
-            //OrderLine.OrderLinesList.Add(orderLine);
             OrderLine.OrderLinesList.Insert(0, orderLine);
             this.OrderLinesList = OrderLine.OrderLinesList;
 
@@ -88,9 +86,6 @@ namespace startProject.Pages
         private async Task<Product[]> ComposeProductListAsync()
         {
             Filter filter = new Filter(this._context.Products);
-
-            /*var GetProductsTask = filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd);
-            return await GetProductsTask.ToArrayAsync();*/
 
             var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArray());
 
