@@ -78,11 +78,12 @@ namespace startProject.Pages
             OrderLine orderLine = await Task<OrderLine>.Run(() => ComposeNewOrderLineAsync());
 
             OrderLine.OrderLinesList.Insert(0, orderLine);
+
             this.OrderLinesList = OrderLine.OrderLinesList;
 
             return LocalRedirect("~/Index?OrderLinesList=" + this.OrderLinesList
                  + "&Quantity=" + this.OrderLine.Quantity
-                 + "&OrderLine.Id=" + this.OrderLine.Id
+                 + "&OrderLine.ProductName=" + this.OrderLine.ProductName
                  );
         }
 
