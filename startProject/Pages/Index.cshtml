@@ -60,8 +60,8 @@
 <form method="post">
     <div class="formfield">
 
-        <label>Kies een product: </label>
-
+        <h1>Kies een product: </h1>
+        <label asp-for="OrderLine.Id" class="control-label"></label>
         <select asp-for="OrderLine.Id" class="form-control" required>
             <option value="">Kies een productNr.</option>
             @foreach (var prod in Model.ResultProducts)
@@ -78,7 +78,8 @@
         </select>
         <span asp-validation-for="OrderLine.Id" class="text-danger"></span>
 
-        <label>Geef hier aantal mee: </label>
+        <h1>Geef hier aantal mee: </h1>
+        <label asp-for="OrderLine.Quantity" class="control-label"></label>
         <input asp-for="OrderLine.Quantity" class="form-control" autofocus />
         <span asp-validation-for="OrderLine.Quantity" class="text-danger"></span>
     </div>
