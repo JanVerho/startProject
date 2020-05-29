@@ -7,6 +7,7 @@ namespace startProject.Model
     {
         [Key]
         [Required(AllowEmptyStrings = false, ErrorMessage = "'{0}' is verplicht.")]
+        [Range(0, 100, ErrorMessage = "'{0}' waarde is niet in lijst")]
         public int Id { get; set; }
 
         [DisplayName("Naam")]

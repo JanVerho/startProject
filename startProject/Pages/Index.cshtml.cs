@@ -80,19 +80,11 @@ namespace startProject.Pages
             OrderLine.OrderLinesList.Insert(0, orderLine);
             this.OrderLinesList = OrderLine.OrderLinesList;
 
-            string printResult = "";
-            foreach (OrderLine item in this.OrderLinesList)
-            {
-                printResult += item.ProductName + " " + item.Quantity + Environment.NewLine;
-            }
-
-            Message = "OnPostCreateOrderLine: " + orderLine.ProductName + " aantal: " + orderLine.Quantity.ToString() + " - PResult : " + printResult;
-
             return LocalRedirect("~/Index?OrderLinesList=" + this.OrderLinesList
-                + "&Quantity=" + this.OrderLine.Quantity
-                + "&OrderLine.Id=" + this.OrderLine.Id
-                + "&ResultProducts" + this.ResultProducts
-                );
+                 + "&Quantity=" + this.OrderLine.Quantity
+                 + "&OrderLine.Id=" + this.OrderLine.Id
+                 // + "&ResultProducts" + this.ResultProducts
+                 );
         }
 
         private async Task<Product[]> ComposeProductListAsync()

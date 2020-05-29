@@ -62,7 +62,7 @@
 
         <h1>Kies een product: </h1>
         <label asp-for="OrderLine.Id" class="control-label"></label>
-        <select asp-for="OrderLine.Id" class="form-control" required>
+        <select asp-for="OrderLine.Id" class="form-control">
             <option value="">Kies een productNr.</option>
             @foreach (var prod in Model.ResultProducts)
             {

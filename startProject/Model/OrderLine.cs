@@ -11,11 +11,10 @@ namespace startProject.Model
         public int Id { get; set; }
 
         [DisplayName("Aantal")]
-        [Range(1, int.MaxValue, ErrorMessage = "'{0}' moet groter of gelijk zijn aan {1} .")]
+        [Range(1, int.MaxValue, ErrorMessage = "'{0}' moet groter dan of gelijk zijn aan {1} .")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "'{0}' is verplicht.")]
         public int Quantity { get; set; } = 1;
 
-        [Range(0, 10, ErrorMessage = "'{0' waarde is niet in lijst")]
         public string ProductName { get; set; }
 
         public static List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
