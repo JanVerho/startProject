@@ -73,7 +73,7 @@
             <label asp-for="OrderLine.ProductName" class="control-label"></label>
             <select asp-for="OrderLine.ProductName" class="form-control">
                 <option value="">Kies een product.</option>
-                @foreach (var prod in Model.ResultProducts)
+                @foreach (var prod in Model.AllProducts)
                 {
                     if (prod.Name == Model.OrderLine.ProductName)
                     {

@@ -30,6 +30,8 @@ namespace startProject.Pages
         [BindProperty(SupportsGet = true)]
         public Product[] ResultProducts { get; set; }
 
+        public Product[] AllProducts { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public OrderLine OrderLine { get; set; }
 
@@ -59,6 +61,8 @@ namespace startProject.Pages
 
         public async Task OnGetAsync()
         {
+            AllProducts = await GetAllProductsAsync();
+
             Product[] product = await Task<Product[]>.Run(() => this.ComposeProductListAsync());
             this.ResultProducts = product;
 
@@ -73,6 +77,8 @@ namespace startProject.Pages
 
         public async Task<IActionResult> OnPostCreateOrderLineAsync()
         {
+            AllProducts = await GetAllProductsAsync();
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -108,7 +114,17 @@ namespace startProject.Pages
                         where prod.Name == this.OrderLine.ProductName
                         select prod.Name;
             string result = await query.FirstOrDefaultAsync();
+
             return new OrderLine(result, this.OrderLine.Quantity);
+        }
+
+        private async Task<Product[]> GetAllProductsAsync()
+        {
+            var query = from prod in this._context.Products
+                        orderby prod.Name
+                        select prod;
+
+            return await query.ToArrayAsync();
         }
     }
 }
