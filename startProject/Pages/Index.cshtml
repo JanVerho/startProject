@@ -41,9 +41,17 @@
 </table>
 
 <form method="get">
-    <p>Vul een weeknummer in:</p>
-    <div>StartWeek Bloei</div><input type="number" name="FormWeekNrFlowerStart" value="FormWeekNrFlowerStart" />
-    <div>EindWeek Bloei</div><input type="number" name="FormWeekNrFlowerEnd" value="FormWeekNrFlowerEnd" />
+    <h1>Filteren op week:</h1>
+    <div>
+        <label asp-for="FormWeekNrFlowerStart" class="control-label"></label>
+        <input asp-for="FormWeekNrFlowerStart" class="form-control" type="number" />            <span asp-validation-for="FormWeekNrFlowerStart" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="FormWeekNrFlowerEnd" class="control-label"></label>
+        <input asp-for="FormWeekNrFlowerEnd" class="form-control" type="number" />            <span asp-validation-for="FormWeekNrFlowerEnd" class="text-danger"></span>
+    </div>
+
     <div>
         <label for="CheckWeekNrFlowerStart">
             Sorteer op StartWeek Bloei
@@ -90,7 +98,6 @@
         <div class="form-group">
             <div class="formfield">
                 <button asp-page-handler="CreateOrderLine" class="btn btn-primary">Maak orderline aan</button>
-                <div asp-validation-summary="All" class="text-danger"></div>
             </div>
         </div>
     </div>

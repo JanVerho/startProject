@@ -33,10 +33,12 @@ namespace startProject.Pages
         [BindProperty(SupportsGet = true)]
         public OrderLine OrderLine { get; set; }
 
+        [DisplayName("StartWeek Bloei")]
         [BindProperty(SupportsGet = true)]
         [Range(1, 52, ErrorMessage = "'{0}' moet min {1} en max {2} zijn .")]
         public string FormWeekNrFlowerStart { get; set; }
 
+        [DisplayName("EindWeek Bloei")]
         [BindProperty(SupportsGet = true)]
         [Range(1, 52, ErrorMessage = "'{0}' moet min {1} en max {2} zijn .")]
         public string FormWeekNrFlowerEnd { get; set; }
