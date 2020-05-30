@@ -37,15 +37,18 @@ namespace startProject.Pages
 
         [DisplayName("StartWeek Bloei")]
         [BindProperty(SupportsGet = true)]
+        [RegularExpression("^(?!0+$)\\d+$", ErrorMessage = "'{0}' moet een geheel getal zijn .")]
         [Range(1, 52, ErrorMessage = "'{0}' moet min {1} en max {2} zijn .")]
         public string FormWeekNrFlowerStart { get; set; }
 
         [DisplayName("EindWeek Bloei")]
         [BindProperty(SupportsGet = true)]
+        [RegularExpression("^(?!0+$)\\d+$", ErrorMessage = "'{0}' moet een geheel getal zijn .")]
         [Range(1, 52, ErrorMessage = "'{0}' moet min {1} en max {2} zijn .")]
         public string FormWeekNrFlowerEnd { get; set; }
 
         [BindProperty(SupportsGet = true)]
+        [DisplayName("Start Bloei")]
         public bool CheckWeekNrFlowerStart
         {
             get { return !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerStart"]); }
@@ -53,6 +56,7 @@ namespace startProject.Pages
         }
 
         [BindProperty(SupportsGet = true)]
+        [DisplayName("Eind Bloei")]
         public bool CheckWeekNrFlowerEnd
         {
             get { return !string.IsNullOrEmpty(this.Request.Query["CheckWeekNrFlowerEnd"]); }

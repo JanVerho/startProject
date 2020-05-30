@@ -11,8 +11,8 @@ namespace startProject.Model
         public int Id { get; set; }
 
         [DisplayName("Aantal")]
-        [Range(1, int.MaxValue, ErrorMessage = "'{0}' moet groter dan of gelijk zijn aan {1} .")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "'{0}' is verplicht.")]
+        [Range(1, int.MaxValue, ErrorMessage = "'{0}' moet een geheel getal zijn .")]
         public int Quantity { get; set; } = 1;
 
         [DisplayName("ProductNaam")]
