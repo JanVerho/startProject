@@ -6,8 +6,9 @@
 
 <div class="text-center">
     <h1 class="display-4">Welkom op onze bloemproduct pagina</h1>
+    <hr />
 </div>
-
+<h1>Overzicht aanbod: </h1>
 <table class="table">
     <thead>
         <tr>
@@ -44,24 +45,22 @@
     <h1>Filteren op week:</h1>
     <div>
         <label asp-for="FormWeekNrFlowerStart" class="control-label"></label>
-        <input asp-for="FormWeekNrFlowerStart" class="form-control" type="number" />            <span asp-validation-for="FormWeekNrFlowerStart" class="text-danger"></span>
+        <input asp-for="FormWeekNrFlowerStart" class="form-control" />            <span asp-validation-for="FormWeekNrFlowerStart" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="FormWeekNrFlowerEnd" class="control-label"></label>
-        <input asp-for="FormWeekNrFlowerEnd" class="form-control" type="number" />            <span asp-validation-for="FormWeekNrFlowerEnd" class="text-danger"></span>
+        <input asp-for="FormWeekNrFlowerEnd" class="form-control" />            <span asp-validation-for="FormWeekNrFlowerEnd" class="text-danger"></span>
     </div>
 
+    <h1>Sorteren op week:</h1>
     <div>
-        <label for="CheckWeekNrFlowerStart">
-            Sorteer op StartWeek Bloei
-        </label>
         <input type="checkbox" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart" />
-        <label for="CheckWeekNrFlowerEnd">
-            Sorteer op EindWeek Bloei
-        </label>
-        <input type="checkbox" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
+        <label asp-for="CheckWeekNrFlowerStart" class="control-label"></label>
+        <br><input type="checkbox" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
+        <label asp-for="CheckWeekNrFlowerEnd" class="control-label"></label>
     </div>
+
     <input type="submit" class="btn btn-primary" value="Filteren(met Get)" />
 </form>
 
@@ -69,43 +68,41 @@
     <div class="formfield">
 
         <div class="form-group">
-            <h1>Kies een product: </h1>
-            <label asp-for="OrderLine.ProductName" class="control-label"></label>
-            <select asp-for="OrderLine.ProductName" class="form-control">
-                <option value="">Kies een product.</option>
-                @foreach (var prod in Model.AllProducts)
-                {
-                    if (prod.Name == Model.OrderLine.ProductName)
+            <h1>Maak een orderlijn aan: </h1>
+            <div>
+                <label asp-for="OrderLine.ProductName" class="control-label"></label>
+                <select asp-for="OrderLine.ProductName" class="form-control">
+                    <option value="">Kies een product.</option>
+                    @foreach (var prod in Model.AllProducts)
                     {
-                        @:<option class="form-control" selected value="@prod.Name">@prod.Name</option>
+                        if (prod.Name == Model.OrderLine.ProductName)
+                        {
+                            @:<option class="form-control" selected value="@prod.Name">@prod.Name</option>
+                        }
+                        else
+                        {
+                            @:<option class="form-control" value="@prod.Name">@prod.Name</option>
+                        }
                     }
-                    else
-                    {
-                        @:<option class="form-control" value="@prod.Name">@prod.Name</option>
-                    }
-                }
-            </select>
-            <span asp-validation-for="OrderLine.ProductName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <h1>Geef hier aantal mee: </h1>
-            <label asp-for="OrderLine.Quantity" class="control-label"></label>
-            <input asp-for="OrderLine.Quantity" class="form-control" autofocus />
-            <span asp-validation-for="OrderLine.Quantity" class="text-danger"></span>
+                </select>
+                <span asp-validation-for="OrderLine.ProductName" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="OrderLine.Quantity" class="control-label"></label>
+                <input asp-for="OrderLine.Quantity" class="form-control" autofocus />
+                <span asp-validation-for="OrderLine.Quantity" class="text-danger"></span>
+            </div>
         </div>
         <br />
         <div class="form-group">
             <div class="formfield">
-                <button asp-page-handler="CreateOrderLine" class="btn btn-primary">Maak orderline aan</button>
+                <button asp-page-handler="CreateOrderLine" class="btn btn-primary">Maak orderlijn aan</button>
             </div>
         </div>
     </div>
-
-    <h3 class="clearfix">@Model.Message</h3>
-    <p>@Html.DisplayNameFor(model => model.OrderLinesList[0].ProductName) </p>
 </form>
 
+<h1>Orderlijnen: </h1>
 <table class="table">
     <thead>
         <tr>
