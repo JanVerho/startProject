@@ -40,7 +40,17 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - startProject - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2020 - startProject - <a asp-area="" asp-page="/Privacy">Privacy - </a>
+            <script id="JSTest">
+
+                var text = "JavaScript: ingeschakeld!";
+                var italicText = text.italics();
+                var coloredText = italicText.fontcolor("green");
+
+                document.write(coloredText);
+                                        //(this).innerHTML = coloredText;
+            </script>
+            <noscript>Helaas, uw brouwser laat geen JavaScript toe!</noscript>
         </div>
     </footer>
 
