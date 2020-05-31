@@ -355,7 +355,7 @@
             url: "Please enter a valid URL.",
             date: "Please enter a valid date.",
             dateISO: "Please enter a valid date (ISO).",
-            number: "Please enter a valid number.",
+            number: "Dit is geen geldig nummer.",
             digits: "Please enter only digits.",
             equalTo: "Please enter the same value again.",
             maxlength: $.validator.format("Please enter no more than {0} characters."),
