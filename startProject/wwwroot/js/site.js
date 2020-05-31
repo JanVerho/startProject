@@ -52,4 +52,36 @@ $(document).ready(function () {
 
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
     // link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/
+
+    jQuery.fn.changeButtonMessage = function (button, element) {
+        if (!($(element).value == "")) {
+            $(button).append("BeginBloei");
+        }
+    }
+    $("#FormWeekNrFlowerStart").changeButtonMessage($("#FilterSort_Btn"), $("#FormWeekNrFlowerStart"), true );
+
+    //$("#FilterSort_Btn").append("- BeginBloei");
+
+
+    $("#FilterSort_Btn").hide();
+    jQuery.fn.houdineButton = function (button) {
+
+       
+        $(this).keyup(function () {
+            if ($(this).val()) {
+                $(button).show();
+            }
+            else {
+                $(button).hide();
+            }
+        });
+        $(button).click(function () {
+            $(this).val('');
+            $(button).hide();
+        });
+    };
+
+        $("#FormWeekNrFlowerStart").changeButtonMessage($("#FilterSort_Btn"), true);
+
+
 });

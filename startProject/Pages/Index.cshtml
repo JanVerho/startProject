@@ -42,26 +42,32 @@
 </table>
 
 <form method="get">
-    <h1>Filteren op week:</h1>
-    <div>
-        <label asp-for="FormWeekNrFlowerStart" class="control-label"></label>
-        <input asp-for="FormWeekNrFlowerStart" class="form-control" />            <span asp-validation-for="FormWeekNrFlowerStart" class="text-danger"></span>
-    </div>
+    <div class="formfield">
+        <div class="form-group">
+            <h1>Filteren:</h1>
+            <div>
+                <label asp-for="FormWeekNrFlowerStart" class="control-label"></label>
+                <input asp-for="FormWeekNrFlowerStart" class="form-control" />            <span asp-validation-for="FormWeekNrFlowerStart" class="text-danger"></span>
+            </div>
 
-    <div>
-        <label asp-for="FormWeekNrFlowerEnd" class="control-label"></label>
-        <input asp-for="FormWeekNrFlowerEnd" class="form-control" />            <span asp-validation-for="FormWeekNrFlowerEnd" class="text-danger"></span>
-    </div>
+            <div>
+                <label asp-for="FormWeekNrFlowerEnd" class="control-label"></label>
+                <input asp-for="FormWeekNrFlowerEnd" class="form-control" />            <span asp-validation-for="FormWeekNrFlowerEnd" class="text-danger"></span>
+            </div>
 
-    <h1>Sorteren op week:</h1>
-    <div>
-        <input type="checkbox" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart" />
-        <label asp-for="CheckWeekNrFlowerStart" class="control-label"></label>
-        <br><input type="checkbox" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
-        <label asp-for="CheckWeekNrFlowerEnd" class="control-label"></label>
-    </div>
+            <h1>Sorteren:</h1>
+            <div>
+                <input type="checkbox" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart" />
+                <label asp-for="CheckWeekNrFlowerStart" class="control-label"></label>
+                <br><input type="checkbox" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
+                <label asp-for="CheckWeekNrFlowerEnd" class="control-label"></label>
+            </div>
 
-    <input type="submit" class="btn btn-primary" value="Filteren(met Get)" />
+            <div>
+                <button asp-page-handler="FilterSort" id="FilterSort_Btn" class="btn btn-primary" value="Filteren">Filteren</button>
+            </div>
+        </div>
+    </div>
 </form>
 
 <form method="post">
