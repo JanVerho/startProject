@@ -32,16 +32,17 @@ $(document).ready(function () {
                         );
                     }
                 });
+                $(select).attr('size', 5);
                 if (selectSingleMatch === true &&
                     $(select).children().length === 1) {
                     $(select).children().get(0).selected = true;
+                    $(select).attr('size', 2);
                 }
-                $(select).attr('size', 5);
             });
         });
     };
 
-    $('#OrderLine_ProductName').filterByText($('#OrderLine_DZIMenuItemId_textbox'), true);
+    $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
 });
 
     //http://www.lessanvaezi.com/filter-select-list-options/
