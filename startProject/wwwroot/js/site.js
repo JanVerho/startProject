@@ -4,6 +4,7 @@
 // Write your Javascript code.
 
 $(document).ready(function () {
+    //Filter script
     jQuery.fn.filterByText = function (textbox, selectSingleMatch) {
         return this.each(function () {
             var select = this;
@@ -13,7 +14,10 @@ $(document).ready(function () {
                     value: $(this).val(),
                     text: $(this).text()
                 };
-                options.push(option);
+
+                if (option.text !== "Kies een product.") {
+                    options.push(option);
+                };
             });
             $(select).data('options', options);
 
@@ -32,17 +36,20 @@ $(document).ready(function () {
                         );
                     }
                 });
-                $(select).attr('size', 5);
                 if (selectSingleMatch === true &&
                     $(select).children().length === 1) {
                     $(select).children().get(0).selected = true;
-                    $(select).attr('size', 2);
+                    $(select).attr('size', 1);
+                    $(select).css({ "border-color": "lightgreen", "background-color": "Honeydew", "font-weight": "Bold" });
+                }
+                else {
+                    $(select).attr('size', 5);
+                    $(select).css({ "border-color": "orange", "background-color": "Lavenderblush" })
                 }
             });
         });
     };
 
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
+    // link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/
 });
-
-    //http://www.lessanvaezi.com/filter-select-list-options/
