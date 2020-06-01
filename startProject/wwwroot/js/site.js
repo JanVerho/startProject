@@ -80,9 +80,9 @@ $(document).ready(function () {
         $(window).scrollTop(0);
     });
 
-    //Color Tables with a jq-script
-    $("tr:even").css("background-color", "#00F4F8");
-    $("tr:odd").css("background-color", "#00F1F1");
+    //Color Tables with a JQ-script
+    $("tr:even").css("background-color", "#F4F4F8");
+    $("tr:odd").css("background-color", "#EFF1F1");
 
     //https://jsfiddle.net/JanVerh/h0e2rtv3/8/
 
