@@ -51,37 +51,67 @@ $(document).ready(function () {
     };
 
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
-    // link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/
+    /* link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/ */
 
-    jQuery.fn.changeButtonMessage = function (button, element) {
-        if (!($(element).value == "")) {
-            $(button).append("BeginBloei");
-        }
-    }
-    $("#FormWeekNrFlowerStart").changeButtonMessage($("#FilterSort_Btn"), $("#FormWeekNrFlowerStart"), true );
+    // $("#FilterSort_Btn").hide();
 
-    //$("#FilterSort_Btn").append("- BeginBloei");
+    /* $("#FormWeekNrFlowerStart").keyup(function () {
+         if ($("#FormWeekNrFlowerStart").val()) {
+             $("#FilterSort_Btn").show();
+             $("#FilterSort_Btn").append(" Bloei");
+         }
+         else {
+             $("#FilterSort_Btn").hide();
+         }
+     });*/
 
+    $("#FormWeekNrFlowerStart").keyup(function () {
+        houdini("#FilterSort_Btn")
+    });
+    $("#FormWeekNrFlowerEnd").keyup(function () {
+        houdini("#FilterSort_Btn")
+    });
 
-    $("#FilterSort_Btn").hide();
-    jQuery.fn.houdineButton = function (button) {
+    $("#FilterSort_Btn").click(function () {
+        $("#FormWeekNrFlowerStart, FormWeekNrFlowerEnd").val('');
+        $("#FilterSort_Btn").text("Filteren");;
+    });
 
-       
-        $(this).keyup(function () {
-            if ($(this).val()) {
-                $(button).show();
-            }
-            else {
-                $(button).hide();
-            }
-        });
-        $(button).click(function () {
-            $(this).val('');
-            $(button).hide();
-        });
-    };
+    /* on load */
 
-        $("#FormWeekNrFlowerStart").changeButtonMessage($("#FilterSort_Btn"), true);
+    //$('#CheckWeekNrFlowerStart').on('change', function () {
+    //    var x = $('#CheckWeekNrFlowerEnd');
+    //    if (this.checked)  {
+    //        $('#FilterSort_Btn').show();
+    //    }
+    //    else if  (x.checked){
+    //        $('#FilterSort_Btn').show();
+    //    }
+    //    else  {
+    //        $('#FilterSort_Btn').hide();
+    //    };
 
+    //});
+    //$('#CheckWeekNrFlowerEnd').on('change', function () {
+    //    if ((this).attr('checked'))  {
+    //        $('#FilterSort_Btn').show();
+    //    }
+    //    else if  ($('#CheckWeekNrFlowerStart').attr('checked' )){
+    //        $('#FilterSort_Btn').show();
+    //    }
+    //    else {
+    //        $('#FilterSort_Btn').hide();
+    //    };
 
+    //});
 });
+
+function houdini(button) {
+    if ($("#FormWeekNrFlowerStart").val() | $("#FormWeekNrFlowerEnd").val()) {
+        $(button).show();
+        $(button).text("Filter op 'BloeiStart' (W" + $("#FormWeekNrFlowerStart").val() + ") tot 'BloeEind'(W" + $("#FormWeekNrFlowerEnd").val() + ")");
+    }
+    else {
+        $(button).text("Filteren");
+    }
+};
