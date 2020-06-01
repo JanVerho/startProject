@@ -3,6 +3,9 @@
 
 // Write your Javascript code.
 
+let isChecked = false;
+let sorterenText = "";
+
 $(document).ready(function () {
     //Filter script
     jQuery.fn.filterByText = function (textbox, selectSingleMatch) {
@@ -53,18 +56,8 @@ $(document).ready(function () {
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
     /* link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/ */
 
-    // $("#FilterSort_Btn").hide();
-
-    /* $("#FormWeekNrFlowerStart").keyup(function () {
-         if ($("#FormWeekNrFlowerStart").val()) {
-             $("#FilterSort_Btn").show();
-             $("#FilterSort_Btn").append(" Bloei");
-         }
-         else {
-             $("#FilterSort_Btn").hide();
-         }
-     });*/
-
+    //Pimp scripts
+    //Sort FilterButton script
     $("#FormWeekNrFlowerStart").keyup(function () {
         houdini("#FilterSort_Btn")
     });
@@ -72,46 +65,52 @@ $(document).ready(function () {
         houdini("#FilterSort_Btn")
     });
 
-    $("#FilterSort_Btn").click(function () {
-        $("#FormWeekNrFlowerStart, FormWeekNrFlowerEnd").val('');
-        $("#FilterSort_Btn").text("Filteren");;
+    $("#CheckWeekNrFlowerStart").on('change', function () {
+        sorterenText = composeSortText();
+        houdini("#FilterSort_Btn")
+    });
+    $("#CheckWeekNrFlowerEnd").on('change', function () {
+        sorterenText = composeSortText();
+        houdini("#FilterSort_Btn")
     });
 
-    /* on load */
-
-    //$('#CheckWeekNrFlowerStart').on('change', function () {
-    //    var x = $('#CheckWeekNrFlowerEnd');
-    //    if (this.checked)  {
-    //        $('#FilterSort_Btn').show();
-    //    }
-    //    else if  (x.checked){
-    //        $('#FilterSort_Btn').show();
-    //    }
-    //    else  {
-    //        $('#FilterSort_Btn').hide();
-    //    };
-
-    //});
-    //$('#CheckWeekNrFlowerEnd').on('change', function () {
-    //    if ((this).attr('checked'))  {
-    //        $('#FilterSort_Btn').show();
-    //    }
-    //    else if  ($('#CheckWeekNrFlowerStart').attr('checked' )){
-    //        $('#FilterSort_Btn').show();
-    //    }
-    //    else {
-    //        $('#FilterSort_Btn').hide();
-    //    };
-
-    //});
+    $("#FilterSort_Btn").click(function () {
+        $("#FormWeekNrFlowerStart, FormWeekNrFlowerEnd").val('');
+        $("#FilterSort_Btn").text("Filteren");
+        $(window).scrollTop(0);
+    });
 });
 
+//Methodes
+function composeSortText() {
+    let textResult = "";
+    let x = document.getElementById('CheckWeekNrFlowerEnd');
+    let y = document.getElementById('CheckWeekNrFlowerStart');
+
+    if (y.checked || x.checked) {
+        textResult += " & Sorteren"
+        if (y.checked) {
+            textResult += " op BeginBloei"
+        }
+        if (x.checked) {
+            textResult += " EindeBloei"
+        }
+    }
+    return textResult
+};
+
 function houdini(button) {
-    if ($("#FormWeekNrFlowerStart").val() | $("#FormWeekNrFlowerEnd").val()) {
-        $(button).show();
-        $(button).text("Filter op 'BloeiStart' (W" + $("#FormWeekNrFlowerStart").val() + ") tot 'BloeEind'(W" + $("#FormWeekNrFlowerEnd").val() + ")");
+    if ($("#FormWeekNrFlowerStart").val() || $("#FormWeekNrFlowerEnd").val()) {
+        $(button).text("Filteren");
+        if ($("#FormWeekNrFlowerStart").val()) {
+            $(button).append(" vanaf 'BloeiStart'(W_" + $("#FormWeekNrFlowerStart").val() + ")");
+        }
+        if ($("#FormWeekNrFlowerEnd").val()) {
+            $(button).append(" tot 'BloeiEind'(W_" + $("#FormWeekNrFlowerEnd").val() + ")");
+        }
     }
     else {
-        $(button).text("Filteren");
+        $(button).text("Filteren(alle)");
     }
+    $(button).append('<br>' + sorterenText);
 };

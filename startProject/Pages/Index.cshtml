@@ -57,9 +57,9 @@
 
             <h1>Sorteren:</h1>
             <div>
-                <input type="checkbox" id="CheckWeekNrFlowerStart" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart"  />
+                <input type="checkbox" id="CheckWeekNrFlowerStart" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart" />
                 <label asp-for="CheckWeekNrFlowerStart" class="control-label"></label>
-                <br><input type="checkbox" id="CheckWeekNrFlowerEnd" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd"  />
+                <br><input type="checkbox" id="CheckWeekNrFlowerEnd" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
                 <label asp-for="CheckWeekNrFlowerEnd" class="control-label"></label>
             </div>
 
@@ -96,7 +96,7 @@
             </div>
             <div>
                 <label asp-for="OrderLine.Quantity" class="control-label"></label>
-                <input asp-for="OrderLine.Quantity" class="form-control" autofocus />
+                <input asp-for="OrderLine.Quantity" class="form-control" />
                 <span asp-validation-for="OrderLine.Quantity" class="text-danger"></span>
             </div>
         </div>
