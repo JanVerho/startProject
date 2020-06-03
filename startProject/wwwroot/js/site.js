@@ -75,7 +75,6 @@ $(document).ready(function () {
     });
 
     $("#FilterSort_Btn").click(function () {
-        $("#FormWeekNrFlowerStart, FormWeekNrFlowerEnd").val('');
         $("#FilterSort_Btn").text("Filteren");
         $(window).scrollTop(0);
     });
@@ -83,8 +82,6 @@ $(document).ready(function () {
     //Color Tables with a JQ-script
     $("tr:even").css("background-color", "#F4F4F8");
     $("tr:odd").css("background-color", "#EFF1F1");
-
- 
 });
 
 //Methodes
