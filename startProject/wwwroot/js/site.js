@@ -86,9 +86,10 @@ $(document).ready(function () {
 
     //https://jsfiddle.net/JanVerh/h0e2rtv3/8/
 
+    $("#thStart").on("click", function () {
+        window.open('https://localhost:44379/?FormWeekNrFlowerStart=&FormWeekNrFlowerEnd=&CheckWeekNrFlowerStart=CheckWeekNrFlowerStart');
+    });
 });
-
-
 
 //Methodes
 function composeSortText() {
