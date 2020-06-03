@@ -84,11 +84,7 @@ $(document).ready(function () {
     $("tr:even").css("background-color", "#F4F4F8");
     $("tr:odd").css("background-color", "#EFF1F1");
 
-    //https://jsfiddle.net/JanVerh/h0e2rtv3/8/
-
-    $("#thStart").on("click", function () {
-        window.open('https://localhost:44379/?FormWeekNrFlowerStart=&FormWeekNrFlowerEnd=&CheckWeekNrFlowerStart=CheckWeekNrFlowerStart');
-    });
+ 
 });
 
 //Methodes
