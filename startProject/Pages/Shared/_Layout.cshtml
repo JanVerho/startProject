@@ -41,19 +41,16 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - startProject - <a asp-area="" asp-page="/Privacy">Privacy - </a>
-            <script id="JSTest">
-                var text = "JavaScript: ingeschakeld!";
-                var italicText = text.italics();
-                var coloredText = italicText.fontcolor("green");
-                document.write(coloredText);
-            </script>
-            <noscript>Helaas, uw brouwser laat geen JavaScript toe!</noscript>
+            <span id="JSTest">
+                <noscript>Helaas, uw brouwser laat geen JavaScript toe!</noscript>
+            </span>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/js_enabled.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

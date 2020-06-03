@@ -74,12 +74,6 @@ body {
 }
 
 /*   JS NoScript*/
-#JSTest {
-    color: green;
-    font-style: italic;
-    font-weight: bold;
-}
-
 noscript {
     color: red;
     font-style: italic;
