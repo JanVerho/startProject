@@ -57,9 +57,25 @@
 
             <h1>Sorteren:</h1>
             <div>
-                <input type="checkbox" id="CheckWeekNrFlowerStart" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart" />
+                @if (Model.CheckWeekNrFlowerStart)
+                {
+                    <input type="checkbox" id="CheckWeekNrFlowerStart" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart" checked />
+                }
+                else
+                {
+                    <input type="checkbox" id="CheckWeekNrFlowerStart" name="CheckWeekNrFlowerStart" value="CheckWeekNrFlowerStart" />
+                }
                 <label asp-for="CheckWeekNrFlowerStart" class="control-label"></label>
-                <br><input type="checkbox" id="CheckWeekNrFlowerEnd" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
+                <br>
+                @if (Model.CheckWeekNrFlowerEnd)
+                {
+                    <input type="checkbox" id="CheckWeekNrFlowerEnd" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" checked />
+                }
+                else
+                {
+                    <input type="checkbox" id="CheckWeekNrFlowerEnd" name="CheckWeekNrFlowerEnd" value="CheckWeekNrFlowerEnd" />
+                }
+
                 <label asp-for="CheckWeekNrFlowerEnd" class="control-label"></label>
             </div>
 

@@ -58,21 +58,24 @@ $(document).ready(function () {
 
     //Pimp scripts
     //Sort FilterButton script
-    $("#FormWeekNrFlowerStart").keyup(function () {
-        houdini("#FilterSort_Btn")
-    });
-    $("#FormWeekNrFlowerEnd").keyup(function () {
-        houdini("#FilterSort_Btn")
-    });
+    sorterenText = composeSortText();
+    houdini("#FilterSort_Btn")
 
-    $("#CheckWeekNrFlowerStart").on('change', function () {
+    $("#FormWeekNrFlowerStart, #FormWeekNrFlowerEnd").keyup(function () {
+        houdini("#FilterSort_Btn")
+    });
+    //$("#FormWeekNrFlowerEnd").keyup(function () {
+    //    houdini("#FilterSort_Btn")
+    //});
+
+    $("#CheckWeekNrFlowerStart, #CheckWeekNrFlowerEnd").on('change', function () {
         sorterenText = composeSortText();
         houdini("#FilterSort_Btn")
     });
-    $("#CheckWeekNrFlowerEnd").on('change', function () {
-        sorterenText = composeSortText();
-        houdini("#FilterSort_Btn")
-    });
+    //$("#CheckWeekNrFlowerEnd").on('change', function () {
+    //    sorterenText = composeSortText();
+    //    houdini("#FilterSort_Btn")
+    //});
 
     $("#FilterSort_Btn").click(function () {
         $("#FilterSort_Btn").text("Filteren");
@@ -87,15 +90,15 @@ $(document).ready(function () {
 //Methodes
 function composeSortText() {
     let textResult = "";
-    let x = document.getElementById('CheckWeekNrFlowerEnd');
-    let y = document.getElementById('CheckWeekNrFlowerStart');
+    let x = document.getElementById('CheckWeekNrFlowerStart');
+    let y = document.getElementById('CheckWeekNrFlowerEnd');
 
-    if (y.checked || x.checked) {
+    if (x.checked || y.checked) {
         textResult += " & Sorteren"
-        if (y.checked) {
+        if (x.checked) {
             textResult += " op BeginBloei"
         }
-        if (x.checked) {
+        if (y.checked) {
             textResult += " EindeBloei"
         }
     }
