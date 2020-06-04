@@ -57,25 +57,18 @@ $(document).ready(function () {
     /* link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/ */
 
     //Pimp scripts
-    //Sort FilterButton script
+    //Sort FilterButton (txt in button) script
     sorterenText = composeSortText();
     houdini("#FilterSort_Btn")
 
     $("#FormWeekNrFlowerStart, #FormWeekNrFlowerEnd").keyup(function () {
         houdini("#FilterSort_Btn")
     });
-    //$("#FormWeekNrFlowerEnd").keyup(function () {
-    //    houdini("#FilterSort_Btn")
-    //});
 
     $("#CheckWeekNrFlowerStart, #CheckWeekNrFlowerEnd").on('change', function () {
         sorterenText = composeSortText();
         houdini("#FilterSort_Btn")
     });
-    //$("#CheckWeekNrFlowerEnd").on('change', function () {
-    //    sorterenText = composeSortText();
-    //    houdini("#FilterSort_Btn")
-    //});
 
     $("#FilterSort_Btn").click(function () {
         $("#FilterSort_Btn").text("Filteren");
