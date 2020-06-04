@@ -22,8 +22,6 @@ namespace startProject.Pages
             this._context = context;
         }
 
-        public string Message { get; set; } = "Nog geen OrderLine aangemaakt";
-
         [BindProperty(SupportsGet = true)]
         public List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
 
@@ -75,8 +73,6 @@ namespace startProject.Pages
             WAIT FOR EVENTUAL NEW INPUT OF VERA*/
 
             this.OrderLinesList = OrderLine.OrderLinesList;
-
-            Message = "OnGetCreateOrderLine gebruikt";
         }
 
         public async Task<IActionResult> OnPostCreateOrderLineAsync()
