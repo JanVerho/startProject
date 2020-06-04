@@ -77,6 +77,12 @@ $(document).ready(function () {
     //Color Tables with a JQ-script
     $("tr:even").css("background-color", "#F4F4F8");
     $("tr:odd").css("background-color", "#EFF1F1");
+
+    if ($('#colorpicker') != null) {
+        $('#colorpicker').farbtastic('#color');
+    }
+
+    $("tr:odd").css("background-color", "#e7f9b3");
 });
 
 //Methodes

@@ -1,0 +1,33 @@
+﻿@page
+@model startProject.Pages.SiteSettingsModel
+@{
+
+}
+
+@*<form><input type="text" id="color" name="color" value="#123456" /></form>
+    <div id="colorpicker"></div>
+
+    <script type="text/javascript" src="~/js/farbtastic.js"></script>
+    <link rel="stylesheet" href="~/css/farbtastic.css" type="text/css" />
+
+    <script>
+
+        $('#colorpicker').farbtastic('#color');
+    </script>*@
+
+<h1>jQuery Color Picker: Farbtastic</h1>
+
+<div id="demo" style="color: red; font-size: 1.4em">jQuery.js is not present. You must install jQuery in this folder for the demo to work.</div>
+
+<form><input type="text" id="color" name="color" value="#123456" /></form>
+<div id="colorpicker"></div>
+
+<p>More info on <a href="http://www.acko.net/dev/farbtastic">Acko.net</a>.</p>
+<p>Created by <a href="http://www.acko.net/">Steven Wittens</a>.</p>
+
+@*<script type="text/javascript" charset="utf-8">
+        //(document).ready(function () {
+           // $('#demo').hide();
+            $('#colorpicker').farbtastic('#color');
+        //});
+    </script>*@
