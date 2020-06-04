@@ -86,15 +86,18 @@ function composeSortText() {
     let x = document.getElementById('CheckWeekNrFlowerStart');
     let y = document.getElementById('CheckWeekNrFlowerEnd');
 
-    if (x.checked || y.checked) {
-        textResult += " & Sorteren"
-        if (x.checked) {
-            textResult += " op BeginBloei"
-        }
-        if (y.checked) {
-            textResult += " EindeBloei"
+    if (x != null && y != null) {
+        if (x.checked || y.checked) {
+            textResult += " & Sorteren"
+            if (x.checked) {
+                textResult += " op BeginBloei"
+            }
+            if (y.checked) {
+                textResult += " EindeBloei"
+            }
         }
     }
+
     return textResult
 };
 
