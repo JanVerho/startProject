@@ -3,7 +3,6 @@
 
 // Write your Javascript code.
 
-let isChecked = false;
 let sorterenText = "";
 
 $(document).ready(function () {
