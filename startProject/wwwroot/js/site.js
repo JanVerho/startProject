@@ -74,15 +74,22 @@ $(document).ready(function () {
         $(window).scrollTop(0);
     });
 
-    //Color Tables with a JQ-script
-    $("tr:even").css("background-color", "#F4F4F8");
+    //Color Tables & Body with a JQ-script
+    $("tr:even").css("background-color", "#bcfbee");
     $("tr:odd").css("background-color", "#EFF1F1");
+    $("body").css("background-color", "#d9fcf6");
 
-    if ($('#colorpicker') != null) {
+    //Pimp change color with ColorPickerr
+    if ($('#colorpicker') != null && $('#color')!=null) {
         $('#colorpicker').farbtastic('#color');
+        $('#colorpicker').on("click", function () {
+            $("body").css("background-color", $("#color").val());
+        });
+        
     }
 
-    $("tr:odd").css("background-color", "#e7f9b3");
+
+  
 });
 
 //Methodes
