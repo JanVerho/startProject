@@ -55,7 +55,7 @@ $(document).ready(function () {
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
     /* link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/ */
 
-    //Pimp scripts
+    //Pimp: JQ-scripts
     //Sort FilterButton (txt in button) script
     sorterenText = composeSortText();
     houdini("#FilterSort_Btn")
@@ -74,22 +74,18 @@ $(document).ready(function () {
         $(window).scrollTop(0);
     });
 
-    //Color Tables & Body with a JQ-script
+    //Color Tables & Body
     $("tr:even").css("background-color", "#bcfbee");
     $("tr:odd").css("background-color", "#EFF1F1");
     $("body").css("background-color", "#d9fcf6");
 
     //Pimp change color with ColorPickerr
-    if ($('#colorpicker') != null && $('#color')!=null) {
+    if ($('#colorpicker') != null && $('#color') != null) {
         $('#colorpicker').farbtastic('#color');
         $('#colorpicker').on("click", function () {
             $("body").css("background-color", $("#color").val());
         });
-        
     }
-
-
-  
 });
 
 //Methodes
@@ -109,7 +105,6 @@ function composeSortText() {
             }
         }
     }
-
     return textResult
 };
 
