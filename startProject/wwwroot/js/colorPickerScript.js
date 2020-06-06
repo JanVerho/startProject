@@ -1,6 +1,16 @@
 ﻿// startProject colorPickerScript.js
 
 $(document).ready(function () {
+    $("ol.howTo, div.source").hide();
+
+    $("h2.howTo").click(function () {
+        $("ol.howTo").toggle(1000);
+    });
+
+    $("h2.source").click(function () {
+        $("div.source").toggle(1000);
+    });
+
     //Pimp change color with ColorPicker
     checkJSIsEnabled();
     setColorFromCookie();
