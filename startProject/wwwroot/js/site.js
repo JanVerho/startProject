@@ -8,14 +8,14 @@ $(document).ready(function () {
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
 
     //Pimp extra JQ-scripts
-    //Txt in button Sort FilterButton
+    //1. Txt in button Sort FilterButton
     sorterenText = composeSortText();
     houdini("#FilterSort_Btn")
     setFilterParam();
     setSortParam();
     executeFilterAndSort();
 
-    //Coloring Table & Body
+    //2. Coloring Table & Body
     setTableRowColors();
     setBodyColor();
 });
