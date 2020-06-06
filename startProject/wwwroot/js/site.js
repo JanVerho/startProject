@@ -78,14 +78,6 @@ $(document).ready(function () {
     $("tr:even").css("background-color", "#bcfbee");
     $("tr:odd").css("background-color", "#EFF1F1");
     $("body").css("background-color", "#d9fcf6");
-
-    //Pimp change color with ColorPickerr
-    if ($('#colorpicker') != null && $('#color') != null) {
-        $('#colorpicker').farbtastic('#color');
-        $('#colorpicker').on("click", function () {
-            $("body").css("background-color", $("#color").val());
-        });
-    }
 });
 
 //Methodes
