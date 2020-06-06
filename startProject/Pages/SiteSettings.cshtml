@@ -1,19 +1,50 @@
 ﻿@page
 @model startProject.Pages.SiteSettingsModel
 @{
-
+    ViewData["Title"] = "SiteSettings page";
 }
+<h1 class="tooltips">Achtergrondkleur site setting:<span>jQuery Color Picker: Farbtastic</span></h1>
+<br />
+<h2 class="tooltips howTo">Hoe gebruiken?<span>Click voor handleiding</span></h2>
+<ol class="howTo">
+    <li>
+        Met een klik wordt de nieuwe kleur gekozen.
+    </li>
+    <li>
+        Met de buitencirkel bepaal je de hoofdkleur.
+    </li>
+    <li>
+        Met het binnenvierkant bepaal je de toon van de gekozen kleur.
+    </li>
+    <li>
+        Bevestig in het dialoogvenster.
+    </li>
+</ol>
 
-<h1>jQuery Color Picker: Farbtastic</h1>
+<div id="demo" style="color: red; font-size: 1.4em">
+    jQuery.js is not present(cause this #demo is visible). You must install jQuery(and /or the _ColorScriptsPartial) in this folder for the demo to work.
+</div>
 
-<div id="demo" style="color: red; font-size: 1.4em">jQuery.js is not present(cause this #demo is visible). You must install jQuery(and /or the _ColorScriptsPartial) in this folder for the demo to work.</div>
-
-<form><input type="text" id="color" name="color" value="#123456" /></form>
+<form>
+    <label name="color">Nieuwe achtergrondkleur: </label>
+    <input type="text" id="color" name="color" value="#123456" />
+</form>
 <div id="colorpicker"></div>
-
-<p>More info on <a href="http://www.acko.net/dev/farbtastic">Acko.net</a>.</p>
-<p>Created by <a href="http://www.acko.net/">Steven Wittens</a>.</p>
-
+<br />
+<h2 class="tooltips source">Bronvermelding:<span>Click voor bron</span></h2>
+<div class="source">
+    Met hartelijke dank voor :
+    <ol>
+        <li>
+            de ColorPicker aan <a href="http://www.acko.net/">Steven Wittens</a>.<br />
+            Meer info op <a href="http://www.acko.net/dev/farbtastic">Acko.net</a>.
+        </li>
+        <li>
+            het CoockiesScript aan <a href="https://github.com/carhartl">Klaus Hartl</a> en <a href="https://github.com/FagnerMartinsBrack">Fagner Brack</a>.<br />
+            Meer info op <a href="https://github.com/js-cookie/js-cookie">Cookie(GitHub)</a>.
+        </li>
+    </ol>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ColorScriptsPartial");}
 }
