@@ -78,7 +78,7 @@ $(document).ready(function () {
     $("tr:even").css("background-color", "#bcfbee");
     $("tr:odd").css("background-color", "#EFF1F1");
     // $("body").css("background-color", "#d9fcf6");
-    if (Cookies.get('ColorPicked_Body') == null) {
+    if (!Cookies.get('ColorPicked_Body')==null) {
         Cookies.set('ColorPicked_Body', '#abe8e0', { expires: 7, path: '' });
     }
 
