@@ -1,92 +1,72 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// startProject site.js
 
-// Write your Javascript code.
-
+//Global var
 let sorterenText = "";
 
 $(document).ready(function () {
-    //Filter script
-    jQuery.fn.filterByText = function (textbox, selectSingleMatch) {
-        return this.each(function () {
-            var select = this;
-            var options = [];
-            $(select).find('option').each(function () {
-                let option = {
-                    value: $(this).val(),
-                    text: $(this).text()
-                };
-
-                if (option.text !== "Kies een product.") {
-                    options.push(option);
-                };
-            });
-            $(select).data('options', options);
-
-            $(textbox).bind('change keyup', function () {
-                $(select).empty();
-                $(select).scrollTop(0);
-                var options = $(select).data('options');;
-                var search = $.trim($(this).val());
-                var regex = new RegExp(search, 'gi');
-
-                $.each(options, function (i) {
-                    var option = options[i];
-                    if (option.text.match(regex) !== null) {
-                        $(select).append(
-                            $('<option>').text(option.text).val(option.value)
-                        );
-                    }
-                });
-                if (selectSingleMatch === true &&
-                    $(select).children().length === 1) {
-                    $(select).children().get(0).selected = true;
-                    $(select).attr('size', 1);
-                    $(select).css({ "border-color": "lightgreen", "background-color": "Honeydew", "font-weight": "Bold" });
-                }
-                else {
-                    $(select).attr('size', 5);
-                    $(select).css({ "border-color": "orange", "background-color": "Lavenderblush" })
-                }
-            });
-        });
-    };
-
+    //FilterByText
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
-    /* link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/ */
 
-    //Pimp: JQ-scripts
-    //Sort FilterButton (txt in button) script
+    //Pimp extra JQ-scripts
+    //Txt in button Sort FilterButton
     sorterenText = composeSortText();
     houdini("#FilterSort_Btn")
+    setFilterParam();
+    setSortParam();
+    executeFilterAndSort();
 
-    $("#FormWeekNrFlowerStart, #FormWeekNrFlowerEnd").keyup(function () {
-        houdini("#FilterSort_Btn")
-    });
-
-    $("#CheckWeekNrFlowerStart, #CheckWeekNrFlowerEnd").on('change', function () {
-        sorterenText = composeSortText();
-        houdini("#FilterSort_Btn")
-    });
-
-    $("#FilterSort_Btn").click(function () {
-        $("#FilterSort_Btn").text("Filteren");
-        $(window).scrollTop(0);
-    });
-
-    //Color Tables & Body
-    $("tr:even").css("background-color", "#bcfbee");
-    $("tr:odd").css("background-color", "#EFF1F1");
-    // $("body").css("background-color", "#d9fcf6");
-    if (!Cookies.get('ColorPicked_Body')==null) {
-        Cookies.set('ColorPicked_Body', '#abe8e0', { expires: 7, path: '' });
-    }
-
-    $("body, #color").css("background-color", Cookies.get('ColorPicked_Body'));
-    $("#color").attr('value', (Cookies.get('ColorPicked_Body')));
+    //Coloring Table & Body
+    setTableRowColors();
+    setBodyColor();
 });
 
 //Methodes
+jQuery.fn.filterByText = function (textbox, selectSingleMatch) {
+    return this.each(function () {
+        var select = this;
+        var options = [];
+        $(select).find('option').each(function () {
+            let option = {
+                value: $(this).val(),
+                text: $(this).text()
+            };
+
+            if (option.text !== "Kies een product.") {
+                options.push(option);
+            };
+        });
+        $(select).data('options', options);
+
+        $(textbox).bind('change keyup', function () {
+            $(select).empty();
+            $(select).scrollTop(0);
+            var options = $(select).data('options');;
+            var search = $.trim($(this).val());
+            var regex = new RegExp(search, 'gi');
+
+            $.each(options, function (i) {
+                var option = options[i];
+                if (option.text.match(regex) !== null) {
+                    $(select).append(
+                        $('<option>').text(option.text).val(option.value)
+                    );
+                }
+            });
+            if (selectSingleMatch === true &&
+                $(select).children().length === 1) {
+                $(select).children().get(0).selected = true;
+                $(select).attr('size', 1);
+                $(select).css({ "border-color": "lightgreen", "background-color": "Honeydew", "font-weight": "Bold" });
+            }
+            else {
+                $(select).attr('size', 5);
+                $(select).css({ "border-color": "orange", "background-color": "Lavenderblush" })
+            }
+        });
+    });
+    /* link to sourceCode used: /http://www.lessanvaezi.com/filter-select-list-options/ */
+};
+
 function composeSortText() {
     let textResult = "";
     let x = document.getElementById('CheckWeekNrFlowerStart');
@@ -121,3 +101,35 @@ function houdini(button) {
     }
     $(button).append('<br>' + sorterenText);
 };
+
+function setTableRowColors() {
+    $("tr:even").css("background-color", "#bcfbee");
+    $("tr:odd").css("background-color", "#EFF1F1");
+}
+
+function setBodyColor() {
+    if (!Cookies.get('ColorPicked_Body') == null) {
+        Cookies.set('ColorPicked_Body', '#abe8e0', { expires: 7, path: '' });
+    }
+    $("body, #color").css("background-color", Cookies.get('ColorPicked_Body'));
+}
+
+function setFilterParam() {
+    $("#FormWeekNrFlowerStart, #FormWeekNrFlowerEnd").keyup(function () {
+        houdini("#FilterSort_Btn")
+    });
+}
+
+function setSortParam() {
+    $("#CheckWeekNrFlowerStart, #CheckWeekNrFlowerEnd").on('change', function () {
+        sorterenText = composeSortText();
+        houdini("#FilterSort_Btn")
+    });
+}
+
+function executeFilterAndSort() {
+    $("#FilterSort_Btn").click(function () {
+        $("#FilterSort_Btn").text("Filteren");
+        $(window).scrollTop(0);
+    });
+}
