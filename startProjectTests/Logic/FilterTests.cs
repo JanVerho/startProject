@@ -153,12 +153,5 @@ namespace startProject.Logic.Tests
             Assert.AreEqual(1, filter.GetProducts("2", "52", false, true).ToArray().Length);
             Assert.AreEqual(0, filter.GetProducts("5", "45", false, false).ToArray().Length);
         }
-
-        /* [TestMethod()]
-         public void ComposeFilterPartQueryTest_Input_Not_Number()
-         {
-             Filter filter = new Filter(this.testProducts);
-             Assert.ThrowsException(filter.ComposeFilterPartQuery(this.testProducts, "a", "++").ToArray();
-         }*/
     }
 }
