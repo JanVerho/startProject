@@ -4,8 +4,13 @@
     ViewData["Title"] = "SiteSettings page";
 }
 <h1 class="tooltips">Achtergrondkleur site setting:<span>jQuery Color Picker: Farbtastic</span></h1>
+<div id="demo" style="color: red; font-size: 1.4em">
+    jQuery.js is not present(cause this #demo is visible). You must install jQuery(and /or the _ColorScriptsPartial) in this file (SiteSettings.cshtml) for the demo to work.
+</div>
 <br />
 <h2 class="tooltips howTo">Hoe gebruiken?<span>Click voor handleiding</span></h2>
+<br />
+<br />
 <ol class="howTo">
     <li>
         Met een muisclick wordt de nieuwe kleur gekozen.
@@ -20,11 +25,6 @@
         Bevestig in het dialoogvenster.
     </li>
 </ol>
-
-<div id="demo" style="color: red; font-size: 1.4em">
-    jQuery.js is not present(cause this #demo is visible). You must install jQuery(and /or the _ColorScriptsPartial) in this file (SiteSettings.cshtml) for the demo to work.
-</div>
-
 <form>
     <label name="color">Nieuwe achtergrondkleur: </label>
     <input type="text" id="color" name="color" value="#123456" />
