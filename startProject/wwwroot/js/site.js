@@ -3,7 +3,7 @@
 //Global var
 let sorterenText = "";
 
-$(document).ready(function () {
+$(document).ready(function main() {
     //FilterByText
     $('#OrderLine_ProductName').filterByText($('#OrderLine_ProductName_textbox'), true);
 

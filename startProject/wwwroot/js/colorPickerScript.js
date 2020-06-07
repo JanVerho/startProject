@@ -1,6 +1,6 @@
 ﻿// startProject colorPickerScript.js
 
-$(document).ready(function () {
+$(document).ready(function main() {
     $("ol.howTo, div.source").hide();
     toggleInfo();
 
