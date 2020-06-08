@@ -131,15 +131,15 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OrderLinesList[0].ProductName)
+                @Html.DisplayNameFor(model => IndexModel.OrderLinesList[0].ProductName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderLinesList[0].Quantity)
+                @Html.DisplayNameFor(model => IndexModel.OrderLinesList[0].Quantity)
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.OrderLinesList)
+        @foreach (var item in IndexModel.OrderLinesList)
         {
             <tr>
                 <td>

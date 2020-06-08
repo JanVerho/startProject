@@ -23,7 +23,7 @@ namespace startProject.Pages
         }
 
         [BindProperty(SupportsGet = true)]
-        public List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
+        static public List<OrderLine> OrderLinesList { get; set; } = new List<OrderLine>();
 
         [BindProperty(SupportsGet = true)]
         public Product[] ResultProducts { get; set; }
@@ -71,8 +71,6 @@ namespace startProject.Pages
             /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
             this.ResultProducts = await GetProductsTask.ToArrayAsync();
             WAIT FOR EVENTUAL NEW INPUT OF VERA*/
-
-            this.OrderLinesList = OrderLine.OrderLinesList;
         }
 
         public async Task<IActionResult> OnPostCreateOrderLineAsync()
@@ -89,20 +87,9 @@ namespace startProject.Pages
 
             OrderLine orderLine = await Task<OrderLine>.Run(() => ComposeNewOrderLineAsync());
 
-            OrderLine query = OrderLine.OrderLinesList.FirstOrDefault(c => c.ProductName == orderLine.ProductName);
-            if (query != null)
-            {
-                query.Quantity += orderLine.Quantity;
-            }
-            else
-            {
-                OrderLine.OrderLinesList.Insert(0, orderLine);
-            }
+            UpdateOrderLineList(orderLine);
 
-            this.OrderLinesList = OrderLine.OrderLinesList;
-
-            return LocalRedirect("~/Index?OrderLinesList=" + this.OrderLinesList
-                 + "&Quantity=" + this.OrderLine.Quantity
+            return LocalRedirect("~/Index?Quantity=" + this.OrderLine.Quantity
                  + "&OrderLine.ProductName=" + this.OrderLine.ProductName
                  );
         }
@@ -133,6 +120,19 @@ namespace startProject.Pages
                         select prod;
 
             return await query.ToArrayAsync();
+        }
+
+        private void UpdateOrderLineList(OrderLine orderLine)
+        {
+            OrderLine query = IndexModel.OrderLinesList.FirstOrDefault(c => c.ProductName == orderLine.ProductName);
+            if (query != null)
+            {
+                query.Quantity += orderLine.Quantity;
+            }
+            else
+            {
+                IndexModel.OrderLinesList.Insert(0, orderLine);
+            }
         }
     }
 }
