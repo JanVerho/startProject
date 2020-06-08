@@ -89,7 +89,15 @@ namespace startProject.Pages
 
             OrderLine orderLine = await Task<OrderLine>.Run(() => ComposeNewOrderLineAsync());
 
-            OrderLine.OrderLinesList.Insert(0, orderLine);
+            OrderLine query = OrderLine.OrderLinesList.FirstOrDefault(c => c.ProductName == orderLine.ProductName);
+            if (query != null)
+            {
+                query.Quantity += orderLine.Quantity;
+            }
+            else
+            {
+                OrderLine.OrderLinesList.Insert(0, orderLine);
+            }
 
             this.OrderLinesList = OrderLine.OrderLinesList;
 

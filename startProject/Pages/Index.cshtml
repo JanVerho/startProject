@@ -93,7 +93,6 @@
             <h1>Maak een orderlijn aan: </h1>
             <div>
                 <label asp-for="OrderLine.ProductName" class="control-label"></label>
-                <input type="text" id="OrderLine_ProductName_textbox" name="OrderLine_ProductName_textbox" class="form-control" value="Typ hier de begin letters in..." onfocus="value=''">
                 <select asp-for="OrderLine.ProductName" class="form-control">
                     <option value="">Kies een product.</option>
                     @foreach (var prod in Model.AllProducts)
@@ -109,6 +108,8 @@
                     }
                 </select>
                 <span asp-validation-for="OrderLine.ProductName" class="text-danger"></span>
+                <br />
+                <input type="text" id="OrderLine_ProductName_textbox" class="form-control" value="Typ hier de begin letters in..." onfocus="value=''">
             </div>
             <div>
                 <label asp-for="OrderLine.Quantity" class="control-label"></label>

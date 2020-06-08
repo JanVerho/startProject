@@ -18,6 +18,8 @@ $(document).ready(function main() {
     //2. Coloring Table & Body
     setTableRowColors();
     setBodyColor();
+
+
 });
 
 //Methodes
@@ -60,7 +62,7 @@ jQuery.fn.filterByText = function (textbox, selectSingleMatch) {
             }
             else {
                 $(select).attr('size', 5);
-                $(select).css({ "border-color": "orange", "background-color": "Lavenderblush" })
+                $(select).css({ "border-color": "gray" })
             }
         });
     });
