@@ -2,6 +2,7 @@
 
 $(document).ready(function main() {
     executeJS_availableTest();
+    checkCookiesAreEnabled();
 });
 
 function executeJS_availableTest() {
@@ -9,4 +10,16 @@ function executeJS_availableTest() {
 
     $("#JSTest").text(confirmText);
     $("#JSTest").css({ "color": "green", "font-weight": "normal", "font-style": "italic" });
+}
+
+function checkCookiesAreEnabled() {
+    let cookieCheck = "Cookies: ingeschakeld!";
+    if (!navigator.cookieEnabled) {
+        cookieCheck = "Cookies: niet ingeschakeld!";
+        $("#cookie").css({ "color": "red", "font-weight": "normal", "font-style": "italic" });
+    }
+    else {
+        $("#cookie").css({ "color": "green", "font-weight": "normal", "font-style": "italic" });
+    }
+    $("#cookie").text(cookieCheck);
 }
