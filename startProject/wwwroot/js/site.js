@@ -18,8 +18,6 @@ $(document).ready(function main() {
     //2. Coloring Table & Body
     setTableRowColors();
     setBodyColor();
-
-
 });
 
 //Methodes
