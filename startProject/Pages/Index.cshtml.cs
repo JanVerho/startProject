@@ -65,12 +65,8 @@ namespace startProject.Pages
         {
             AllProducts = await GetAllProductsAsync();
 
-            Product[] product = await /*Task<Product[]>.Run(() => */ this.ComposeProductListAsync()/*)*/;
+            Product[] product = await this.ComposeProductListAsync();
             this.ResultProducts = product;
-
-            /* var GetProductsTask = Task.Run(() => filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd));
-            this.ResultProducts = await GetProductsTask.ToArrayAsync();
-            WAIT FOR EVENTUAL NEW INPUT OF VERA*/
         }
 
         public async Task<IActionResult> OnPostCreateOrderLineAsync()
@@ -82,10 +78,10 @@ namespace startProject.Pages
                 return Page();
             }
 
-            Product[] product = await /*Task<Product[]>.Run(() => */ComposeProductListAsync()/*)*/;
+            Product[] product = await ComposeProductListAsync();
             this.ResultProducts = product;
 
-            OrderLine orderLine = await /*Task<OrderLine>.Run(() =>*/ ComposeNewOrderLineAsync()/*)*/;
+            OrderLine orderLine = await ComposeNewOrderLineAsync();
 
             UpdateOrderLineList(orderLine);
 
@@ -98,9 +94,9 @@ namespace startProject.Pages
         {
             Filter filter = new Filter(this._context.Products);
 
-            var GetProductsTask = /*Task.Run(() =>*/await filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArrayAsync()/*)*/;
+            var GetProductsTask = await filter.GetProducts(this.FormWeekNrFlowerStart, this.FormWeekNrFlowerEnd, this.CheckWeekNrFlowerStart, this.CheckWeekNrFlowerEnd).ToArrayAsync();
 
-            return /*await*/ GetProductsTask;
+            return GetProductsTask;
         }
 
         private async Task<OrderLine> ComposeNewOrderLineAsync()
