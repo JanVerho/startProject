@@ -1,4 +1,4 @@
-﻿// check and show on index-page if browser has JS enabled
+﻿// check and show on index-page if browser has JS enabled & cookies are allowed
 
 $(document).ready(function main() {
     executeJS_availableTest();
