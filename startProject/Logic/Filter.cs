@@ -29,21 +29,21 @@ namespace startProject.Logic
             return queryResult;
         }
 
-        public IQueryable<Product> ComposeFilterPartQuery(/*IEnumerable*/IQueryable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
+        public IQueryable<Product> ComposeFilterPartQuery(IQueryable<Product> queryResult, string inputWeekNrFlowerStart, string inputWeekNrFlowerEnd)
         {
-            if (!string.IsNullOrEmpty(inputWeekNrFlowerStart) /*&& int.TryParse(inputWeekNrFlowerStart, out int resultStart)*/)
+            if (!string.IsNullOrEmpty(inputWeekNrFlowerStart))
             {
                 queryResult = queryResult.Where(q => q.WeekNrFlowerStart >= int.Parse(inputWeekNrFlowerStart));
             }
 
-            if (!string.IsNullOrEmpty(inputWeekNrFlowerEnd) /*&& int.TryParse(inputWeekNrFlowerStart, out int resultEnd)*/)
+            if (!string.IsNullOrEmpty(inputWeekNrFlowerEnd))
             {
                 queryResult = queryResult.Where(q => q.WeekNrFlowerEnd <= int.Parse(inputWeekNrFlowerEnd));
             }
-            return queryResult/*.AsQueryable()*/;
+            return queryResult;
         }
 
-        public IQueryable<Product> ComposeSortPartQuery(/*IEnumerable*/IQueryable<Product> queryResult, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
+        public IQueryable<Product> ComposeSortPartQuery(IQueryable<Product> queryResult, bool checkWeekNrFlowerStart, bool checkWeekNrFlowerEnd)
         {
             if (checkWeekNrFlowerStart && !checkWeekNrFlowerEnd)
             {
@@ -61,7 +61,7 @@ namespace startProject.Logic
             {
                 queryResult = queryResult.OrderBy(q => q.Name);
             }
-            return queryResult/*.AsQueryable()*/;
+            return queryResult;
         }
     }
 }
