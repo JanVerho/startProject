@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -19,7 +18,6 @@ namespace startProject.Model
         [Required(AllowEmptyStrings = false, ErrorMessage = "'{0}' is verplicht.")]
         public string ProductName { get; set; }
 
-        // constructors
         public OrderLine()
         {
         }
