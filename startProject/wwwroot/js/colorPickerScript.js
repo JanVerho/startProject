@@ -1,7 +1,7 @@
 ﻿// startProject colorPickerScript.js
 
-$(document).ready(function main() {
-    $("ol.howTo, div.source").hide();
+$(document).ready(function main() {    
+    fadeOutText()
     toggleInfo();
 
     checkJSIsEnabled();
@@ -47,6 +47,10 @@ function confirmFunction(newColorCode) {
     }
     console.log(txt);
     return r;
+}
+
+function fadeOutText(){
+    $("ol.howTo, div.source").fadeOut(4500);
 }
 
 function toggleInfo() {

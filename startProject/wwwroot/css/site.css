@@ -86,33 +86,32 @@ noscript {
     display: inline;
 }
 
-    .tooltips span {
-        position: absolute;
-        width: auto;
-        color: #000000;
-        background: #ffffff;
-        height: auto;
-        line-height: 35px;
-        text-align: center;
-        font-size: medium;
-        visibility: hidden;
-        border-radius: 6px;
-        box-shadow: 3px 2px 7px #284224;
-        margin: 5px;
+.tooltips span {
+    position: absolute;
+    width: auto;
+    color: #000000;
+    background: #ffffff;
+    height: auto;
+    line-height: 35px;
+    text-align: center;
+    font-size: medium;
+    visibility: hidden;
+    border-radius: 6px;
+    box-shadow: 3px 2px 7px #284224;
+    margin: 5px;
+}
+.tooltips span:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #E2FFC2;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
     }
-
-        .tooltips span:after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -8px;
-            width: 0;
-            height: 0;
-            border-top: 8px solid #E2FFC2;
-            border-right: 8px solid transparent;
-            border-left: 8px solid transparent;
-        }
 
 :hover.tooltips span {
     visibility: visible;
