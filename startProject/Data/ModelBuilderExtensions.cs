@@ -17,7 +17,7 @@ namespace startProject.Data
                 new Product(7, "zonnebloem", 20, 32),
                 new Product(8, "margriet", 18, 28),
                 new Product(9, "goudsbloem", 20, 30),
-                new Product(10, "Clematis ", 30, 35),
+                new Product(10, "clematis", 30, 35),
             };
             foreach (Product p in initialProducts)
             {
