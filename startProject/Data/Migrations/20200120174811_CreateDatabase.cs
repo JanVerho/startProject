@@ -69,7 +69,7 @@ namespace startProject.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "Name", "WeekNrFlowerEnd", "WeekNrFlowerStart" },
-                values: new object[] { 10, "Clematis ", 35, 30 });
+                values: new object[] { 10, "clematis", 35, 30 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
